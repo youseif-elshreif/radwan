@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Container from "@/components/common/Container";
-import FilterBar from "@/components/common/FilterBar";
+import FilterBar, { ExtendedFilters } from "@/components/common/FilterBar";
 import CourseCard from "@/components/home/CourseCard";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Button from "@/components/ui/Button";
@@ -16,7 +16,7 @@ const CoursesPage: React.FC = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [currentFilters, setCurrentFilters] = useState<CourseFilters>({});
+  const [currentFilters, setCurrentFilters] = useState<ExtendedFilters>({});
 
   useEffect(() => {
     loadInitialData();
@@ -41,13 +41,87 @@ const CoursesPage: React.FC = () => {
     }
   };
 
-  const handleFiltersChange = async (filters: CourseFilters) => {
+  const applyClientSideFilters = (
+    courses: Course[],
+    filters: ExtendedFilters
+  ): Course[] => {
+    let filtered = [...courses];
+
+    // Apply price range filter
+    if (filters.minPrice !== undefined || filters.maxPrice !== undefined) {
+      filtered = filtered.filter((course) => {
+        const price = course.price || 0;
+        const minCheck =
+          filters.minPrice === undefined || price >= filters.minPrice;
+        const maxCheck =
+          filters.maxPrice === undefined || price <= filters.maxPrice;
+        return minCheck && maxCheck;
+      });
+    }
+
+    // Apply level filter (this would need to be added to Course interface)
+    if (filters.level) {
+      // For now, we'll simulate this - in real app, course would have a level field
+      filtered = filtered.filter((course) =>
+        course.tags?.some((tag) =>
+          tag.toLowerCase().includes(filters.level?.toLowerCase() || "")
+        )
+      );
+    }
+
+    // Apply sorting
+    if (filters.sortBy) {
+      filtered.sort((a, b) => {
+        switch (filters.sortBy) {
+          case "name_asc":
+            return a.name.localeCompare(b.name);
+          case "name_desc":
+            return b.name.localeCompare(a.name);
+          case "price_asc":
+            return (a.price || 0) - (b.price || 0);
+          case "price_desc":
+            return (b.price || 0) - (a.price || 0);
+          case "date_desc":
+            return (
+              new Date(b.start_date || 0).getTime() -
+              new Date(a.start_date || 0).getTime()
+            );
+          case "date_asc":
+            return (
+              new Date(a.start_date || 0).getTime() -
+              new Date(b.start_date || 0).getTime()
+            );
+          case "rating_desc":
+            // Simulate rating based on enrolled_count for now
+            return (b.enrolled_count || 0) - (a.enrolled_count || 0);
+          default:
+            return 0;
+        }
+      });
+    }
+
+    return filtered;
+  };
+
+  const handleFiltersChange = async (filters: ExtendedFilters) => {
     try {
       setCurrentFilters(filters);
       setIsLoading(true);
 
-      const filteredData = await coursesApi.getCourses(filters);
-      setFilteredCourses(filteredData);
+      // Get base filtered data from API (search, category)
+      const baseFilters: CourseFilters = {};
+      if (filters.search) baseFilters.search = filters.search;
+      if (filters.category) baseFilters.category = filters.category;
+
+      const apiFilteredData = await coursesApi.getCourses(baseFilters);
+
+      // Apply client-side filters (sorting, price range, level)
+      const fullyFilteredData = applyClientSideFilters(
+        apiFilteredData,
+        filters
+      );
+
+      setFilteredCourses(fullyFilteredData);
     } catch (err) {
       setError("فشل في تطبيق الفلاتر. يرجى المحاولة مرة أخرى.");
       console.error("Error filtering courses:", err);
@@ -65,30 +139,101 @@ const CoursesPage: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       <main>
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-primary to-primary/90 text-white py-20">
-          <Container>
-            <div className="text-center max-w-3xl mx-auto">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                جميع الدورات
-              </h1>
-              <p className="text-xl text-primary-50 leading-relaxed">
-                اكتشف مجموعة واسعة من الدورات التعليمية في العلوم الشرعية
-                والتطبيقية المصممة خصيصاً لتطوير مهاراتك ومعرفتك
-              </p>
+        <section
+          className="relative min-h-[70vh] flex items-center text-white overflow-hidden"
+          style={{
+            backgroundImage:
+              "url(https://images.unsplash.com/photo-1564769625905-50e93615e769?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundAttachment: "fixed",
+          }}
+        >
+          {/* Dark overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary/85 to-accent/75"></div>
+
+          {/* Islamic geometric pattern overlay */}
+          <div
+            className="absolute inset-0 opacity-20"
+            style={{
+              backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><g fill="none" stroke="%23ffffff" stroke-opacity="0.3"><circle cx="50" cy="50" r="40" stroke-width="1"/><path d="M50 10v80M10 50h80" stroke-width="0.5"/><circle cx="50" cy="50" r="25" stroke-width="0.5"/><circle cx="50" cy="50" r="15" stroke-width="0.5"/><path d="M30 30l40 40M70 30l-40 40" stroke-width="0.3"/></g></svg>')`,
+              backgroundSize: "100px 100px",
+            }}
+          ></div>
+
+          {/* Floating decorative elements */}
+          <div className="absolute top-20 right-10 w-16 h-16 border border-accent/30 rounded-full animate-float hidden lg:block"></div>
+          <div className="absolute bottom-32 left-16 w-12 h-12 bg-accent/20 rounded-full animate-pulse-slow hidden lg:block"></div>
+          <div className="absolute top-1/3 left-1/4 w-8 h-8 border border-white/20 rotate-45 animate-float hidden lg:block"></div>
+          <div className="absolute bottom-1/4 right-1/3 w-10 h-10 bg-white/10 rounded-full animate-pulse-slow hidden lg:block"></div>
+
+          <Container className="relative z-10">
+            <div className="text-center max-w-4xl mx-auto">
+              <div className="mb-8">
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+                  جميع{" "}
+                  <span className="text-accent mx-3 relative">الدورات</span>
+                </h1>
+                <div className="w-24 h-1 bg-gradient-to-r from-accent to-accent/50 mx-auto mb-8 rounded-full"></div>
+                <p className="text-xl md:text-2xl text-white/90 leading-relaxed font-medium">
+                  اكتشف مجموعة واسعة من الدورات التعليمية في العلوم الشرعية
+                  والتطبيقية
+                  <br />
+                  المصممة خصيصاً لتطوير مهاراتك ومعرفتك
+                </p>
+              </div>
+
+              {/* Quick stats */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
+                <div className="text-center p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20">
+                  <div className="text-3xl font-bold text-accent mb-1">
+                    {courses.length}+
+                  </div>
+                  <div className="text-sm text-white/80">دورة متاحة</div>
+                </div>
+                <div className="text-center p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20">
+                  <div className="text-3xl font-bold text-accent mb-1">
+                    {categories.length}+
+                  </div>
+                  <div className="text-sm text-white/80">تخصص مختلف</div>
+                </div>
+                <div className="text-center p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20">
+                  <div className="text-3xl font-bold text-accent mb-1">
+                    500+
+                  </div>
+                  <div className="text-sm text-white/80">طالب نشط</div>
+                </div>
+                <div className="text-center p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20">
+                  <div className="text-3xl font-bold text-accent mb-1">50+</div>
+                  <div className="text-sm text-white/80">مدرس خبير</div>
+                </div>
+              </div>
             </div>
           </Container>
         </section>
 
         {/* Courses Content */}
-        <section className="py-16">
+        <section
+          className="py-20 relative"
+          style={{
+            backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><g fill="none" stroke="%23336154" stroke-opacity="0.06"><circle cx="40" cy="40" r="30" stroke-width="1"/><path d="M40 10v60M10 40h60" stroke-width="0.5"/><circle cx="40" cy="40" r="20" stroke-width="0.5"/><circle cx="40" cy="40" r="10" stroke-width="0.5"/></g></svg>')`,
+            backgroundSize: "80px 80px",
+          }}
+        >
+          {/* Decorative top border */}
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
+
           <Container>
             {/* Section Header */}
-            <SectionHeader
-              title="استكشف دوراتنا"
-              subtitle="اختر الدورة المناسبة لك من بين مجموعة متنوعة من التخصصات"
-              accent={true}
-              className="mb-12"
-            />
+            <div className="text-center">
+              <div className="relative inline-block">
+                <SectionHeader
+                  title="اختر دورتك التعليمية"
+                  subtitle="استعرض مجموعة متنوعة من الدورات"
+                  accent={true}
+                />
+              </div>
+            </div>
 
             {/* Filter Bar */}
             <FilterBar
@@ -121,44 +266,79 @@ const CoursesPage: React.FC = () => {
             {!isLoading && !error && (
               <>
                 {filteredCourses.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {filteredCourses.map((course) => (
-                      <CourseCard key={course.id} course={course} />
-                    ))}
+                  <div className="relative">
+                    {/* Decorative corner elements */}
+                    <div className="absolute -top-4 -right-4 w-20 h-20 border-2 border-accent/20 rounded-full animate-float hidden lg:block"></div>
+                    <div className="absolute -bottom-8 -left-8 w-16 h-16 bg-primary/5 rounded-full animate-pulse-slow hidden lg:block"></div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+                      {filteredCourses.map((course, index) => (
+                        <div
+                          key={course.id}
+                          className="animate-fade-in"
+                          style={{ animationDelay: `${index * 0.1}s` }}
+                        >
+                          <CourseCard course={course} />
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 ) : (
-                  <div className="text-center py-20">
-                    <div className="bg-gray-100 rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-6">
-                      <svg
-                        className="w-10 h-10 text-gray-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                        />
-                      </svg>
+                  <div className="relative text-center py-20">
+                    {/* Islamic geometric background for empty state */}
+                    <div
+                      className="absolute inset-0 opacity-5"
+                      style={{
+                        backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><g fill="none" stroke="%23336154" stroke-opacity="0.3"><circle cx="60" cy="60" r="50" stroke-width="2"/><path d="M60 10v100M10 60h100" stroke-width="1"/><circle cx="60" cy="60" r="35" stroke-width="1"/><circle cx="60" cy="60" r="20" stroke-width="1"/><path d="M35 35l50 50M85 35l-50 50" stroke-width="0.5"/></g></svg>')`,
+                        backgroundSize: "120px 120px",
+                        backgroundPosition: "center",
+                      }}
+                    ></div>
+
+                    <div className="relative z-10">
+                      <div className="relative mx-auto mb-8 w-32 h-32">
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center animate-pulse-slow">
+                          <div className="w-24 h-24 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center">
+                            <svg
+                              className="w-12 h-12 text-primary/60"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={1.5}
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                        {/* Floating decorative elements */}
+                        <div className="absolute -top-2 -right-2 w-6 h-6 border border-accent/30 rounded-full animate-float"></div>
+                        <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-primary/20 rounded-full animate-pulse-slow"></div>
+                      </div>
+
+                      <h3 className="text-2xl font-bold text-primary mb-3">
+                        لا توجد دورات متاحة
+                      </h3>
+                      <div className="w-16 h-0.5 bg-gradient-to-r from-accent to-primary mx-auto mb-4"></div>
+                      <p className="text-gray-600 mb-8 text-lg max-w-md mx-auto leading-relaxed">
+                        {Object.keys(currentFilters).length > 0
+                          ? "لم يتم العثور على دورات تطابق الفلاتر المحددة. جرب تغيير معايير البحث"
+                          : "لا توجد دورات متاحة حالياً. نعمل على إضافة المزيد من الدورات قريباً"}
+                      </p>
+
+                      {Object.keys(currentFilters).length > 0 && (
+                        <Button
+                          onClick={() => handleFiltersChange({})}
+                          variant="outline"
+                          className="bg-white border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300"
+                        >
+                          عرض جميع الدورات
+                        </Button>
+                      )}
                     </div>
-                    <h3 className="text-xl font-semibold text-gray-700 mb-2">
-                      لا توجد دورات متاحة
-                    </h3>
-                    <p className="text-gray-500 mb-6">
-                      {Object.keys(currentFilters).length > 0
-                        ? "لم يتم العثور على دورات تطابق الفلاتر المحددة"
-                        : "لا توجد دورات متاحة حالياً"}
-                    </p>
-                    {Object.keys(currentFilters).length > 0 && (
-                      <Button
-                        onClick={() => handleFiltersChange({})}
-                        variant="outline"
-                      >
-                        عرض جميع الدورات
-                      </Button>
-                    )}
                   </div>
                 )}
 
