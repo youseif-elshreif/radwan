@@ -1,4 +1,19 @@
-﻿import { BaseUser, BaseFormData, BaseComponentProps } from "./base.types";
+﻿// Base types
+interface BaseUser {
+  id: string;
+  email?: string;
+  first_name: string;
+  last_name: string;
+}
+
+interface BaseFormData {
+  [key: string]: string | number | boolean | undefined;
+}
+
+interface BaseComponentProps {
+  className?: string;
+}
+
 export interface User extends BaseUser {
   phone?: string;
   age?: number;
@@ -64,7 +79,7 @@ export interface UserStats {
   attendedLessons: number;
   PrivitelessonCredits: number;
   PubliclessonCredits: number;
-  GroupUsualDate?: any;
+  GroupUsualDate?: string;
   GroupMeetingLink?: string;
   GroupName?: string;
 }

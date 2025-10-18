@@ -61,7 +61,7 @@ export const isAuthenticated = (): boolean => {
 /**
  * Parse JWT token (without validation - client-side only)
  */
-export const parseJwt = (token: string): any => {
+export const parseJwt = (token: string): Record<string, unknown> | null => {
   try {
     // Split the token and get the payload
     const base64Url = token.split(".")[1];
@@ -86,7 +86,7 @@ export const parseJwt = (token: string): any => {
 export const isTokenExpired = (token: string): boolean => {
   try {
     const decoded = parseJwt(token);
-    if (!decoded || !decoded.exp) {
+    if (!decoded || !decoded.exp || typeof decoded.exp !== "number") {
       return true;
     }
     // Check if expiration time is past current time
