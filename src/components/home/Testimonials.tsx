@@ -108,8 +108,23 @@ const Testimonials: React.FC = () => {
       : testimonials;
 
   return (
-    <section className="py-16 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative py-16 bg-surface overflow-hidden">
+      {/* Subtle dot pattern */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 opacity-3"
+        style={{
+          backgroundImage:
+            'url(\'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><g fill="%23e47a2e"><circle cx="30" cy="30" r="1.5" opacity="0.4"/><circle cx="10" cy="10" r="1" opacity="0.3"/><circle cx="50" cy="10" r="1" opacity="0.3"/><circle cx="10" cy="50" r="1" opacity="0.3"/><circle cx="50" cy="50" r="1" opacity="0.3"/></g></svg>\')',
+          backgroundSize: "60px 60px",
+        }}
+      />
+
+      {/* Subtle accent borders */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent"></div>
+      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent"></div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           title="آراء الطلاب وأولياء الأمور"
           subtitle="شاهد ما يقوله طلابنا وأولياء أمورهم عن تجربتهم معنا"

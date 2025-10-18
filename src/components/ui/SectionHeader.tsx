@@ -28,8 +28,6 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
           alignment === "center" ? "mx-auto" : ""
         }`}
       >
-        <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 w-16 h-0.5 bg-gradient-to-r from-transparent via-accent to-transparent opacity-60" />
-
         <h2 className="relative text-3xl sm:text-4xl font-bold font-arabic text-text-primary">
           {accent ? (
             <>

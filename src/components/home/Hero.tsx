@@ -3,7 +3,7 @@ import Button from "../ui/Button";
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[calc(100vh-4rem)] py-11 flex items-center justify-center overflow-hidden">
       {/* Background - Gradient fallback if hero.jpg doesn't exist */}
       <div className="absolute inset-0 bg-gradient-to-l from-primary to-primary-100"></div>
 

@@ -114,8 +114,23 @@ const FeaturedCourses: React.FC = () => {
   }
 
   return (
-    <section className="py-16 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative py-16 bg-background overflow-hidden">
+      {/* Islamic geometric pattern background */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 opacity-5"
+        style={{
+          backgroundImage:
+            'url(\'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><defs><pattern id="islamic" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="%23e47a2e" stroke-width="0.5"><path d="M20 0l20 20-20 20L0 20 20 0z"/><circle cx="20" cy="20" r="8" stroke-opacity="0.3"/><path d="M0 0l40 40M40 0L0 40" stroke-opacity="0.2"/></g></pattern></defs><rect width="200" height="200" fill="url(%23islamic)"/></svg>\')',
+          backgroundSize: "200px 200px",
+        }}
+      />
+
+      {/* Corner accent decorations */}
+      <div className="absolute top-8 right-8 w-16 h-16 border-4 border-accent/20 rotate-45 rounded-sm"></div>
+      <div className="absolute bottom-8 left-8 w-12 h-12 border-4 border-accent/30 rotate-45 rounded-sm"></div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           title="الكورسات المميزة"
           subtitle="اكتشف أفضل الكورسات التعليمية المصممة خصيصاً لتطوير مهارات الأطفال والشباب"
