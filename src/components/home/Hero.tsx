@@ -4,8 +4,8 @@ import Button from "../ui/Button";
 const Hero: React.FC = () => {
   return (
     <section className="relative min-h-[calc(100vh-4rem)] py-11 flex items-center justify-center overflow-hidden">
-      {/* Background - Gradient fallback if hero.jpg doesn't exist */}
-      <div className="absolute inset-0 bg-gradient-to-l from-primary to-primary-100"></div>
+      {/* Background - Gradient matching courses page */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary/85 to-accent/75"></div>
 
       {/* Background Image Overlay */}
       <div
