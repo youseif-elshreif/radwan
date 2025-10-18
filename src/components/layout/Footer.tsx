@@ -1,4 +1,5 @@
 import React from "react";
+import { FaEnvelope, FaPhone, FaMobile, FaMapMarkerAlt } from "react-icons/fa";
 
 const Footer: React.FC = () => {
   return (
@@ -11,9 +12,18 @@ const Footer: React.FC = () => {
               معلومات التواصل
             </h3>
             <div className="space-y-2 text-text-secondary font-arabic">
-              <p>📧 info@al-radwan.edu</p>
-              <p>📞 +20 123 456 789</p>
-              <p>📱 +20 987 654 321</p>
+              <p className="flex items-center justify-end gap-2">
+                <span>info@al-radwan.edu</span>
+                <FaEnvelope className="text-accent" />
+              </p>
+              <p className="flex items-center justify-end gap-2">
+                <span>+20 123 456 789</span>
+                <FaPhone className="text-accent" />
+              </p>
+              <p className="flex items-center justify-end gap-2">
+                <span>+20 987 654 321</span>
+                <FaMobile className="text-accent" />
+              </p>
             </div>
           </div>
 
@@ -22,13 +32,16 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-semibold text-text-primary font-arabic mb-4">
               العنوان
             </h3>
-            <p className="text-text-secondary font-arabic">
-              شارع المعز لدين الله
-              <br />
-              القاهرة، مصر
-              <br />
-              الرمز البريدي: 11511
-            </p>
+            <div className="flex items-start justify-end gap-2 text-text-secondary font-arabic">
+              <div className="text-right">
+                شارع المعز لدين الله
+                <br />
+                القاهرة، مصر
+                <br />
+                الرمز البريدي: 11511
+              </div>
+              <FaMapMarkerAlt className="text-accent mt-1 flex-shrink-0" />
+            </div>
           </div>
 
           {/* Quick Links */}

@@ -5,6 +5,7 @@ import Card from "../ui/Card";
 import { Stats } from "@/types";
 import { getStats } from "@/utils/api";
 import SectionHeader from "../ui/SectionHeader";
+import { FaUsers, FaGraduationCap, FaStar } from "react-icons/fa";
 
 const StatusCounters: React.FC = () => {
   const [stats, setStats] = useState<Stats | null>(null);
@@ -34,43 +35,19 @@ const StatusCounters: React.FC = () => {
 
   const counterItems = [
     {
-      icon: (
-        <svg
-          className="w-8 h-8 text-primary"
-          fill="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-        </svg>
-      ),
+      icon: <FaUsers className="w-8 h-8 text-primary" />,
       label: "طالب مسجل",
       value: stats?.students || 0,
       color: "text-primary",
     },
     {
-      icon: (
-        <svg
-          className="w-8 h-8 text-accent"
-          fill="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 16l-5 2.72L7 16v-3.73L12 15l5-2.73V16z" />
-        </svg>
-      ),
+      icon: <FaGraduationCap className="w-8 h-8 text-accent" />,
       label: "كورس نشط",
       value: stats?.active_courses || 0,
       color: "text-accent",
     },
     {
-      icon: (
-        <svg
-          className="w-8 h-8 text-success"
-          fill="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-        </svg>
-      ),
+      icon: <FaStar className="w-8 h-8 text-success" />,
       label: "موسم مكتمل",
       value: stats?.seasons_completed || 0,
       color: "text-success",

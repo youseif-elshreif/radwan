@@ -5,11 +5,16 @@ import Card from "../ui/Card";
 import { Testimonial } from "@/types";
 import { getTestimonials } from "@/utils/api";
 import SectionHeader from "../ui/SectionHeader";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { FaStar, FaRegStar } from "react-icons/fa";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const Testimonials: React.FC = () => {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const loadTestimonials = async () => {
@@ -27,28 +32,13 @@ const Testimonials: React.FC = () => {
     loadTestimonials();
   }, []);
 
-  // Auto-scroll testimonials
-  useEffect(() => {
-    if (testimonials.length > 1) {
-      const interval = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-      }, 5000);
-      return () => clearInterval(interval);
-    }
-  }, [testimonials.length]);
-
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, i) => (
-      <svg
-        key={i}
-        className={`w-5 h-5 ${
-          i < rating ? "text-yellow-400" : "text-gray-300"
-        }`}
-        fill="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-      </svg>
+      i < rating ? (
+        <FaStar key={i} className="w-5 h-5 text-yellow-400" />
+      ) : (
+        <FaRegStar key={i} className="w-5 h-5 text-gray-300" />
+      )
     ));
   };
 
@@ -98,15 +88,6 @@ const Testimonials: React.FC = () => {
     );
   }
 
-  const visibleTestimonials =
-    testimonials.length >= 3
-      ? [
-          testimonials[currentIndex],
-          testimonials[(currentIndex + 1) % testimonials.length],
-          testimonials[(currentIndex + 2) % testimonials.length],
-        ]
-      : testimonials;
-
   return (
     <section className="relative py-16 bg-surface overflow-hidden">
       {/* Subtle dot pattern */}
@@ -132,60 +113,65 @@ const Testimonials: React.FC = () => {
         />
 
         <div className="relative">
-          {/* Testimonials Container */}
-          <div className="flex gap-6 overflow-hidden">
-            {visibleTestimonials.map((testimonial, index) => (
-              <Card
-                key={`${currentIndex}-${index}`}
-                className="min-w-80 flex-1"
-              >
-                {/* Quote */}
-                <div className="mb-6">
-                  <div className="text-4xl text-primary mb-2">&ldquo;</div>
-                  <p className="text-text-primary font-arabic text-right leading-relaxed">
-                    {testimonial.quote}
-                  </p>
-                </div>
+          {/* Swiper Container */}
+          <Swiper
+            modules={[Navigation, Pagination, Autoplay]}
+            spaceBetween={24}
+            slidesPerView={1}
+            loop={true}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+            }}
+            pagination={{
+              clickable: true,
+            }}
+            breakpoints={{
+              640: {
+                slidesPerView: 2,
+              },
+              1024: {
+                slidesPerView: 3,
+              },
+            }}
+            className="testimonials-swiper pb-12"
+          >
+            {testimonials.map((testimonial, index) => (
+              <SwiperSlide key={testimonial.id || index}>
+                <Card className="h-full">
+                  {/* Quote */}
+                  <div className="mb-6">
+                    <div className="text-4xl text-primary mb-2">&ldquo;</div>
+                    <p className="text-text-primary font-arabic text-right leading-relaxed">
+                      {testimonial.quote}
+                    </p>
+                  </div>
 
-                {/* Rating */}
-                <div className="flex justify-end mb-4">
-                  {renderStars(testimonial.rating)}
-                </div>
+                  {/* Rating */}
+                  <div className="flex justify-end mb-4">
+                    {renderStars(testimonial.rating)}
+                  </div>
 
-                {/* Author */}
-                <div className="flex items-center gap-3 justify-end">
-                  <div className="text-right">
-                    <div className="font-semibold text-text-primary font-arabic">
-                      {testimonial.name}
-                    </div>
-                    {testimonial.role && (
-                      <div className="text-sm text-text-secondary font-arabic">
-                        {testimonial.role}
+                  {/* Author */}
+                  <div className="flex items-center gap-3 justify-end">
+                    <div className="text-right">
+                      <div className="font-semibold text-text-primary font-arabic">
+                        {testimonial.name}
                       </div>
-                    )}
+                      {testimonial.role && (
+                        <div className="text-sm text-text-secondary font-arabic">
+                          {testimonial.role}
+                        </div>
+                      )}
+                    </div>
+                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                      <span className="text-xl">👤</span>
+                    </div>
                   </div>
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                    <span className="text-xl">👤</span>
-                  </div>
-                </div>
-              </Card>
+                </Card>
+              </SwiperSlide>
             ))}
-          </div>
-
-          {/* Navigation Dots */}
-          {testimonials.length > 3 && (
-            <div className="flex justify-center mt-8 gap-2">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`w-3 h-3 rounded-full transition-colors ${
-                    index === currentIndex ? "bg-primary" : "bg-gray-300"
-                  }`}
-                />
-              ))}
-            </div>
-          )}
+          </Swiper>
         </div>
       </div>
     </section>

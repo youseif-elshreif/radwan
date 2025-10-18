@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
 import { SearchFilters as SearchFiltersType } from "@/types";
+import { FaSearch, FaFilter } from "react-icons/fa";
 
 interface SearchFiltersProps {
   onFiltersChange: (filters: SearchFiltersType) => void;
@@ -40,8 +41,9 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({ onFiltersChange }) => {
     <section className="bg-surface py-8 border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-white rounded-xl shadow-sm border border-border p-6">
-          <h2 className="text-xl font-semibold text-text-primary font-arabic mb-6 text-right">
-            ابحث عن الكورس المناسب
+          <h2 className="text-xl font-semibold text-text-primary font-arabic mb-6 text-right flex items-center justify-end gap-2">
+            <span>ابحث عن الكورس المناسب</span>
+            <FaFilter className="text-accent" />
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -169,8 +171,13 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({ onFiltersChange }) => {
 
           {/* Search Button */}
           <div className="mt-6 flex justify-center">
-            <Button variant="primary" size="lg" className="min-w-40">
-              ابحث
+            <Button
+              variant="primary"
+              size="lg"
+              className="min-w-40 flex items-center gap-2"
+            >
+              <span>ابحث</span>
+              <FaSearch />
             </Button>
           </div>
         </div>
