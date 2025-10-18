@@ -10,8 +10,9 @@ const Navbar: React.FC = () => {
 
   const navLinks = [
     { href: "#", label: "الرئيسية", active: true },
-    { href: "#courses", label: "الكورسات" },
     { href: "#about", label: "عن الأكاديمية" },
+    { href: "#activities", label: "الأنشطة" },
+    { href: "#courses", label: "الكورسات" },
     { href: "#contact", label: "تواصل" },
   ];
 

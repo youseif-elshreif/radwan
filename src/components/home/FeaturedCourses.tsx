@@ -114,7 +114,10 @@ const FeaturedCourses: React.FC = () => {
   }
 
   return (
-    <section className="relative py-16 bg-background overflow-hidden">
+    <section
+      id="courses"
+      className="relative py-16 bg-background overflow-hidden"
+    >
       {/* Islamic geometric pattern background */}
       <div
         aria-hidden="true"
