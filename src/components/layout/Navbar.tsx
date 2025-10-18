@@ -23,8 +23,8 @@ const Navbar: React.FC = () => {
             <Image
               src="/imgs/Radwan.png"
               alt="أكاديمية الرضوان"
-              width={120}
-              height={40}
+              width={180}
+              height={60}
               className="h-10 w-auto"
             />
           </div>
