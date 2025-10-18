@@ -1,0 +1,234 @@
+{
+  "courses": [
+    {
+      "id": "1",
+      "name": "أساسيات البرمجة للأطفال",
+      "description": "تعلم أساسيات البرمجة بطريقة ممتعة وتفاعلية باستخدام أدوات بصرية مناسبة للأطفال",
+      "season_id": "1",
+      "start_date": "2025-01-15",
+      "end_date": "2025-03-15",
+      "num_lectures": 16,
+      "capacity": 20,
+      "price": 800,
+      "instructor_id": "1",
+      "enrolled_count": 15,
+      "is_active": true,
+      "thumbnail": "/imgs/course-1.jpg",
+      "tags": ["برمجة", "أطفال", "مبتدئين"],
+      "featured": true
+    },
+    {
+      "id": "2",
+      "name": "الرياضيات المتقدمة للمرحلة الإعدادية",
+      "description": "تطوير مهارات الرياضيات المتقدمة والتفكير المنطقي للطلاب في المرحلة الإعدادية",
+      "season_id": "2",
+      "start_date": "2025-02-01",
+      "end_date": "2025-04-30",
+      "num_lectures": 20,
+      "capacity": 15,
+      "price": 1200,
+      "instructor_id": "2",
+      "enrolled_count": 12,
+      "is_active": true,
+      "thumbnail": "/imgs/course-2.jpg",
+      "tags": ["رياضيات", "إعدادي", "متقدم"],
+      "featured": true
+    },
+    {
+      "id": "3",
+      "name": "اللغة الإنجليزية للمبتدئين",
+      "description": "تعلم أساسيات اللغة الإنجليزية من خلال الألعاب والأنشطة التفاعلية",
+      "season_id": "1",
+      "start_date": "2025-01-20",
+      "end_date": "2025-03-20",
+      "num_lectures": 18,
+      "capacity": 25,
+      "price": 900,
+      "instructor_id": "3",
+      "enrolled_count": 20,
+      "is_active": true,
+      "thumbnail": "/imgs/course-3.jpg",
+      "tags": ["لغة إنجليزية", "مبتدئين", "أطفال"],
+      "featured": false
+    },
+    {
+      "id": "4",
+      "name": "الفنون والرسم الإبداعي",
+      "description": "تنمية المواهب الفنية والإبداعية من خلال تعلم تقنيات الرسم والألوان",
+      "season_id": "1",
+      "start_date": "2025-01-10",
+      "end_date": "2025-02-28",
+      "num_lectures": 12,
+      "capacity": 18,
+      "price": 600,
+      "instructor_id": "1",
+      "enrolled_count": 16,
+      "is_active": true,
+      "thumbnail": "/imgs/course-4.jpg",
+      "tags": ["فنون", "رسم", "إبداع"],
+      "featured": true
+    },
+    {
+      "id": "5",
+      "name": "العلوم التطبيقية والتجارب",
+      "description": "استكشاف عالم العلوم من خلال التجارب العملية والأنشطة التطبيقية",
+      "season_id": "2",
+      "start_date": "2025-02-15",
+      "end_date": "2025-04-15",
+      "num_lectures": 14,
+      "capacity": 20,
+      "price": 1000,
+      "instructor_id": "2",
+      "enrolled_count": 8,
+      "is_active": true,
+      "thumbnail": "/imgs/course-5.jpg",
+      "tags": ["علوم", "تجارب", "عملي"],
+      "featured": true
+    },
+    {
+      "id": "6",
+      "name": "تطوير الشخصية والثقة بالنفس",
+      "description": "برنامج شامل لتطوير مهارات التواصل والثقة بالنفس للأطفال والمراهقين",
+      "season_id": "1",
+      "start_date": "2025-01-25",
+      "end_date": "2025-03-10",
+      "num_lectures": 10,
+      "capacity": 15,
+      "price": 750,
+      "instructor_id": "3",
+      "enrolled_count": 10,
+      "is_active": true,
+      "thumbnail": "/imgs/course-6.jpg",
+      "tags": ["تطوير شخصية", "ثقة", "مهارات"],
+      "featured": false
+    }
+  ],
+  "instructors": [
+    {
+      "id": "1",
+      "user_id": "u1",
+      "first_name": "أحمد",
+      "last_name": "محمد",
+      "bio": "مطور برامج ومدرب معتمد في تعليم البرمجة للأطفال بخبرة 8 سنوات"
+    },
+    {
+      "id": "2",
+      "user_id": "u2",
+      "first_name": "فاطمة",
+      "last_name": "علي",
+      "bio": "أستاذة رياضيات وعلوم بكالوريوس تربية جامعة القاهرة، خبرة 12 سنة"
+    },
+    {
+      "id": "3",
+      "user_id": "u3",
+      "first_name": "محمود",
+      "last_name": "حسن",
+      "bio": "مدرس لغة إنجليزية ومدرب تنمية بشرية، ماجستير في اللغويات التطبيقية"
+    }
+  ],
+  "tags": [
+    {
+      "id": "1",
+      "name": "برمجة"
+    },
+    {
+      "id": "2",
+      "name": "رياضيات"
+    },
+    {
+      "id": "3",
+      "name": "لغة إنجليزية"
+    },
+    {
+      "id": "4",
+      "name": "علوم"
+    },
+    {
+      "id": "5",
+      "name": "فنون"
+    },
+    {
+      "id": "6",
+      "name": "تطوير شخصية"
+    }
+  ],
+  "seasons": [
+    {
+      "id": "1",
+      "name": "الفصل الدراسي الثاني 2025",
+      "season_type": "school",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-31"
+    },
+    {
+      "id": "2",
+      "name": "دورة الربيع المكثفة 2025",
+      "season_type": "summer_camp",
+      "start_date": "2025-02-01",
+      "end_date": "2025-04-30"
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "1",
+      "name": "سارة أحمد",
+      "role": "ولي أمر",
+      "quote": "أكاديمية الرضوان غيرت حياة ابني للأفضل. المدرسين متخصصين والمناهج مصممة بعناية فائقة.",
+      "rating": 5
+    },
+    {
+      "id": "2",
+      "name": "محمد علي",
+      "role": "طالب - 14 سنة",
+      "quote": "تعلمت البرمجة بطريقة ممتعة جداً وأصبحت أقدر أعمل تطبيقات بسيطة بنفسي. شكراً للأكاديمية!",
+      "rating": 5
+    },
+    {
+      "id": "3",
+      "name": "نادية محمود",
+      "role": "ولي أمر",
+      "quote": "البيئة التعليمية محفزة جداً وابنتي بقت تحب الرياضيات أكتر من الأول. نتائج ممتازة!",
+      "rating": 4
+    },
+    {
+      "id": "4",
+      "name": "خالد حسام",
+      "role": "طالب - 12 سنة",
+      "quote": "المدرسين بيشرحوا بطريقة سهلة ومفهومة. أحب آجي الأكاديمية كل يوم!",
+      "rating": 5
+    }
+  ],
+  "stats": {
+    "students": 547,
+    "active_courses": 28,
+    "seasons_completed": 15
+  },
+  "users": [
+    {
+      "id": "u1",
+      "phone_number1": "+20123456789",
+      "email": "ahmed.mohamed@example.com",
+      "first_name": "أحمد",
+      "last_name": "محمد",
+      "role": "instructor"
+    },
+    {
+      "id": "u2",
+      "phone_number1": "+20987654321",
+      "email": "fatma.ali@example.com",
+      "first_name": "فاطمة",
+      "last_name": "علي",
+      "role": "instructor"
+    },
+    {
+      "id": "u3",
+      "phone_number1": "+20555666777",
+      "email": "mahmoud.hassan@example.com",
+      "first_name": "محمود",
+      "last_name": "حسن",
+      "role": "instructor"
+    }
+  ],
+  "children": [],
+  "pending_enrollments": []
+}
