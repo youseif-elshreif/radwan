@@ -16,7 +16,6 @@ const InstructorLoginPage: React.FC = () => {
           >
             <LoginForm
               role="instructor"
-              heading=""
               showSocialLogin={false}
               redirectTo="/dashboard/instructor"
             />

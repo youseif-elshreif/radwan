@@ -50,7 +50,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
     const filters: ExtendedFilters = {};
 
     if (search) filters.search = search;
-    if (selectedCategory) filters.category = selectedCategory;
+    if (selectedCategory) filters.category = [selectedCategory];
     if (selectedLevel) filters.level = selectedLevel;
     if (sortBy) filters.sortBy = sortBy;
     if (priceRange.min) filters.minPrice = Number(priceRange.min);

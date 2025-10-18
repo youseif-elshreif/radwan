@@ -3,6 +3,7 @@ import { Course, Lecture } from "@/types";
 import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
+import Image from "next/image";
 import {
   FiClock,
   FiUsers,
@@ -65,9 +66,11 @@ const InstructorCoursesList: React.FC<InstructorCoursesListProps> = ({
               <div className="flex items-start space-x-6 space-x-reverse">
                 {/* Course Thumbnail */}
                 <div className="flex-shrink-0">
-                  <img
+                  <Image
                     src={course.thumbnail || "/default-course.jpg"}
                     alt={course.name}
+                    width={96}
+                    height={96}
                     className="w-24 h-24 rounded-lg object-cover"
                   />
                 </div>

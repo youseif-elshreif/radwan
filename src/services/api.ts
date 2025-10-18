@@ -361,8 +361,14 @@ export const getParentDashboard = async (
  */
 export const postLectureAttendance = async (
   lectureId: string,
-  payload: any
-): Promise<any> => {
+  payload: {
+    studentId?: string;
+    childId?: string;
+    present: boolean;
+    rating?: number;
+    notes?: string;
+  }[]
+): Promise<{ success: boolean; message: string }> => {
   try {
     await new Promise((resolve) => setTimeout(resolve, 500));
 
@@ -397,7 +403,12 @@ export const getPaymentsByParent = async (
 /**
  * Get user by ID with role-specific data
  */
-export const getUserWithRole = async (userId: string): Promise<any> => {
+export const getUserWithRole = async (
+  userId: string
+): Promise<{
+  user: User;
+  roleData: StudentUser | Instructor | Parent | null;
+}> => {
   try {
     const userResponse = await api.get(`/users/${userId}`);
     const user: User = userResponse.data;
@@ -424,7 +435,7 @@ export const getUserWithRole = async (userId: string): Promise<any> => {
     }
 
     return {
-      ...user,
+      user,
       roleData,
     };
   } catch (error) {

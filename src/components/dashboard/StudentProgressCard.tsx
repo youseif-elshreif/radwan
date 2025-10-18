@@ -1,12 +1,12 @@
 import React from "react";
 import Card from "@/components/ui/Card";
-import { ExamResult, LectureAttendance } from "@/types";
+import { ExamResult, LectureAttendance, Enrollment } from "@/types";
 import { FiTarget, FiTrendingUp, FiCalendar, FiAward } from "react-icons/fi";
 
 interface StudentProgressCardProps {
   examResults: ExamResult[];
   attendances: LectureAttendance[];
-  enrollments: any[];
+  enrollments: Enrollment[];
 }
 
 const StudentProgressCard: React.FC<StudentProgressCardProps> = ({

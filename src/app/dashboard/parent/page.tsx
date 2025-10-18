@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Container from "@/components/common/Container";
 import ParentOverview from "@/components/dashboard/ParentOverview";
 import ParentChildrenList from "@/components/dashboard/ParentChildrenList";
-import { ParentDashboardData, Payment, PendingEnrollment } from "@/types";
+import { ParentDashboardData } from "@/types";
 import { getParentDashboard } from "@/services/api";
 import { FiDollarSign, FiClock, FiCheckCircle, FiX } from "react-icons/fi";
 import Card from "@/components/ui/Card";
@@ -116,7 +116,7 @@ const ParentDashboardPage: React.FC = () => {
               {/* Children List */}
               <div className="lg:col-span-2">
                 <ParentChildrenList
-                  children={dashboardData.children}
+                  childrenList={dashboardData.children}
                   enrollments={dashboardData.enrollments}
                 />
               </div>

@@ -12,10 +12,14 @@ interface SearchFiltersProps {
 
 const SearchFilters: React.FC<SearchFiltersProps> = ({ onFiltersChange }) => {
   const [filters, setFilters] = useState<SearchFiltersType>({
+    search: "",
     season: "",
     category: [],
+    instructor: "",
     ageRange: { min: 5, max: 18 },
     priceRange: { min: 0, max: 1000 },
+    sortBy: "name",
+    sortOrder: "asc",
   });
 
   const handleFilterChange = (
@@ -52,7 +56,12 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({ onFiltersChange }) => {
               <label className="block text-sm font-medium text-text-primary font-arabic mb-2 text-right">
                 البحث
               </label>
-              <Input placeholder="ابحث عن كورس..." className="w-full" />
+              <Input
+                placeholder="ابحث عن كورس..."
+                className="w-full"
+                value={filters.search}
+                onChange={(e) => handleFilterChange("search", e.target.value)}
+              />
             </div>
 
             {/* Season Filter */}
@@ -85,7 +94,7 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({ onFiltersChange }) => {
                   type="number"
                   placeholder="من"
                   value={filters.ageRange?.min.toString()}
-                  onChange={(e) =>
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleFilterChange("ageRange", {
                       min: parseInt(e.target.value) || 5,
                       max: filters.ageRange?.max || 18,
@@ -97,7 +106,7 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({ onFiltersChange }) => {
                   type="number"
                   placeholder="إلى"
                   value={filters.ageRange?.max.toString()}
-                  onChange={(e) =>
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleFilterChange("ageRange", {
                       min: filters.ageRange?.min || 5,
                       max: parseInt(e.target.value) || 18,
@@ -118,7 +127,7 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({ onFiltersChange }) => {
                   type="number"
                   placeholder="من"
                   value={filters.priceRange?.min.toString()}
-                  onChange={(e) =>
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleFilterChange("priceRange", {
                       min: parseInt(e.target.value) || 0,
                       max: filters.priceRange?.max || 1000,
@@ -130,7 +139,7 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({ onFiltersChange }) => {
                   type="number"
                   placeholder="إلى"
                   value={filters.priceRange?.max.toString()}
-                  onChange={(e) =>
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleFilterChange("priceRange", {
                       min: filters.priceRange?.min || 0,
                       max: parseInt(e.target.value) || 1000,
@@ -153,7 +162,7 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({ onFiltersChange }) => {
                   key={category}
                   onClick={() => {
                     const newCategories = filters.category?.includes(category)
-                      ? filters.category.filter((c) => c !== category)
+                      ? filters.category.filter((c: string) => c !== category)
                       : [...(filters.category || []), category];
                     handleFilterChange("category", newCategories);
                   }}

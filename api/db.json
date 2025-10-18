@@ -30,7 +30,7 @@
       "instructor_id": "ins2",
       "enrolled_count": 20,
       "is_active": true,
-      "thumbnail": "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "thumbnail": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       "tags": ["فقه", "عبادات", "مبتدئ"],
       "featured": true
     },
@@ -47,7 +47,7 @@
       "instructor_id": "ins3",
       "enrolled_count": 15,
       "is_active": true,
-      "thumbnail": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "thumbnail": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       "tags": ["برمجة", "أطفال", "مبتدئ"],
       "featured": true
     },
@@ -64,7 +64,7 @@
       "instructor_id": "ins4",
       "enrolled_count": 12,
       "is_active": true,
-      "thumbnail": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "thumbnail": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       "tags": ["رياضيات", "متقدم", "إعدادي"],
       "featured": false
     },
@@ -212,7 +212,7 @@
       "dob": "2012-05-12",
       "unique_code": "CH001",
       "status": "active",
-      "photo_url": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=80",
+      "photo_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       "created_at": "2024-01-15T10:00:00Z"
     },
     {
@@ -223,7 +223,7 @@
       "dob": "2010-08-23",
       "unique_code": "CH002",
       "status": "active",
-      "photo_url": "https://images.unsplash.com/photo-1494790108755-2616b332e234?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=80",
+      "photo_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       "created_at": "2024-01-15T10:00:00Z"
     },
     {
@@ -234,7 +234,7 @@
       "dob": "2011-12-05",
       "unique_code": "CH003",
       "status": "active",
-      "photo_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=80",
+      "photo_url":  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       "created_at": "2024-02-01T10:00:00Z"
     }
   ],

@@ -6,21 +6,19 @@ import { useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import { LoginCredentials, AuthResponse } from "@/types";
-import { FiEye, FiEyeOff, FiPhone, FiMail } from "react-icons/fi";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
 import { loginStudentOrParent, loginInstructor } from "@/services/api";
 
 interface LoginFormProps {
   role: "student" | "parent" | "instructor";
   apiEndpoint?: string;
-  heading?: string;
   redirectTo?: string;
   showSocialLogin?: boolean;
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({
   role,
-  heading,
   redirectTo,
   showSocialLogin = true,
 }) => {
@@ -129,19 +127,6 @@ const LoginForm: React.FC<LoginFormProps> = ({
   const handleSocialLogin = (provider: "google" | "facebook") => {
     // TODO: Implement social login
     console.log(`Login with ${provider} for ${role}`);
-  };
-
-  const getDefaultHeading = () => {
-    switch (role) {
-      case "instructor":
-        return "تسجيل دخول المعلمين";
-      case "parent":
-        return "تسجيل دخول أولياء الأمور";
-      case "student":
-        return "تسجيل دخول الطلاب";
-      default:
-        return "تسجيل الدخول";
-    }
   };
 
   const getRegisterLink = () => {

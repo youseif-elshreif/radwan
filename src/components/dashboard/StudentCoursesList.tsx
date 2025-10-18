@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { Enrollment, Lecture } from "@/types";
 import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
@@ -57,9 +58,11 @@ const StudentCoursesList: React.FC<StudentCoursesListProps> = ({
               <div className="flex items-start space-x-4 space-x-reverse">
                 {/* Course Thumbnail */}
                 <div className="flex-shrink-0">
-                  <img
+                  <Image
                     src={course?.thumbnail || "/default-course.jpg"}
-                    alt={course?.name}
+                    alt={course?.name || "Course"}
+                    width={80}
+                    height={80}
                     className="w-20 h-20 rounded-lg object-cover"
                   />
                 </div>

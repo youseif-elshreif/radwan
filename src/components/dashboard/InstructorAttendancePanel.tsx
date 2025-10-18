@@ -29,7 +29,6 @@ interface AttendanceEntry {
 
 const InstructorAttendancePanel: React.FC<InstructorAttendancePanelProps> = ({
   selectedLecture,
-  attendances,
   onClose,
 }) => {
   // Mock student data - in real app this would come from enrollments
@@ -64,7 +63,7 @@ const InstructorAttendancePanel: React.FC<InstructorAttendancePanelProps> = ({
   const updateAttendance = (
     index: number,
     field: keyof AttendanceEntry,
-    value: any
+    value: string | number | boolean
   ) => {
     setAttendanceEntries((prev) => {
       const updated = [...prev];

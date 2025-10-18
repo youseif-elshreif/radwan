@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 import { Child, Enrollment } from "@/types";
 import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
@@ -13,12 +14,12 @@ import {
 import { calculateAge } from "@/services/api";
 
 interface ParentChildrenListProps {
-  children: Child[];
+  childrenList: Child[];
   enrollments: Enrollment[];
 }
 
 const ParentChildrenList: React.FC<ParentChildrenListProps> = ({
-  children,
+  childrenList,
   enrollments,
 }) => {
   const [expandedChild, setExpandedChild] = useState<string | null>(null);
@@ -55,7 +56,7 @@ const ParentChildrenList: React.FC<ParentChildrenListProps> = ({
       </div>
 
       <div className="space-y-4">
-        {children.map((child) => {
+        {childrenList.map((child: Child) => {
           const childEnrollments = getChildEnrollments(child.id);
           const isExpanded = expandedChild === child.id;
           const age = calculateAge(child.dob);
@@ -71,9 +72,11 @@ const ParentChildrenList: React.FC<ParentChildrenListProps> = ({
                   {/* Child Avatar */}
                   <div className="flex-shrink-0">
                     {child.photo_url ? (
-                      <img
+                      <Image
                         src={child.photo_url}
                         alt={`${child.first_name} ${child.last_name}`}
+                        width={48}
+                        height={48}
                         className="w-12 h-12 rounded-full object-cover"
                       />
                     ) : (
@@ -134,12 +137,14 @@ const ParentChildrenList: React.FC<ParentChildrenListProps> = ({
                           className="flex items-center justify-between p-4 bg-gray-50 rounded-lg"
                         >
                           <div className="flex items-center space-x-3 space-x-reverse">
-                            <img
+                            <Image
                               src={
                                 enrollment.course?.thumbnail ||
                                 "/default-course.jpg"
                               }
-                              alt={enrollment.course?.name}
+                              alt={enrollment.course?.name || "Course"}
+                              width={48}
+                              height={48}
                               className="w-12 h-12 rounded-lg object-cover"
                             />
                             <div>
@@ -218,7 +223,7 @@ const ParentChildrenList: React.FC<ParentChildrenListProps> = ({
           );
         })}
 
-        {children.length === 0 && (
+        {childrenList.length === 0 && (
           <Card className="text-center py-12">
             <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <FiUser className="w-8 h-8 text-gray-400" />

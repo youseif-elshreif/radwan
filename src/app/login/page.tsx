@@ -14,7 +14,7 @@ const LoginPage: React.FC = () => {
             title="تسجيل الدخول"
             subtitle="أهلاً بعودتك إلى أكاديمية الرضوان"
           >
-            <LoginForm role="student" heading="" showSocialLogin={true} />
+            <LoginForm role="student" showSocialLogin={true} />
           </FormWrapper>
         </Container>
       </main>

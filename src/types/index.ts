@@ -299,6 +299,7 @@ export interface AuthResponse {
 export interface CourseFilters {
   search?: string;
   tags?: string[];
+  category?: string[];
   season_id?: string;
   instructor_id?: string;
   featured?: boolean;
@@ -310,6 +311,7 @@ export interface ExtendedFilters extends CourseFilters {
   minPrice?: number;
   maxPrice?: number;
   level?: string;
+  category?: string[];
 }
 
 // API Response Types
@@ -344,3 +346,37 @@ export type PaymentMethod =
   | "vodafone_cash"
   | "other";
 export type PaymentStatus = "pending" | "paid" | "refunded" | "void";
+
+// UI Component Props
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
+  error?: string;
+  icon?: React.ReactNode;
+  className?: string;
+}
+
+export interface SearchFilters {
+  search: string;
+  category: string[];
+  season: string;
+  instructor: string;
+  priceRange: { min: number; max: number };
+  ageRange?: { min: number; max: number };
+  sortBy: "name" | "price" | "date" | "rating";
+  sortOrder: "asc" | "desc";
+}
+
+export interface Stats {
+  students: number;
+  active_courses: number;
+  seasons_completed: number;
+}
+
+export interface Testimonial {
+  id: string;
+  name: string;
+  role: string;
+  quote: string;
+  rating: number;
+}
