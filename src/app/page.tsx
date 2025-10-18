@@ -38,11 +38,11 @@ export default function HomePage() {
       {/* Courses Section */}
       <FeaturedCourses />
 
-      {/* Call To Action Section */}
-      <CallToAction />
-
       {/* Testimonials */}
       <Testimonials />
+
+      {/* Call To Action Section */}
+      <CallToAction />
     </div>
   );
 }
