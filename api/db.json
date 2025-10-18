@@ -2,170 +2,528 @@
   "courses": [
     {
       "id": "1",
+      "name": "تحفيظ القرآن الكريم للمبتدئين",
+      "description": "تحفيظ القرآن الكريم مع تعلم أحكام التجويد الأساسية بطريقة علمية صحيحة",
+      "season_id": "1",
+      "start_date": "2025-01-10",
+      "end_date": "2025-06-10",
+      "num_lectures": 40,
+      "capacity": 30,
+      "price": 600,
+      "instructor_id": "ins1",
+      "enrolled_count": 28,
+      "is_active": true,
+      "thumbnail": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "tags": ["قرآن", "تجويد", "مبتدئ"],
+      "featured": true
+    },
+    {
+      "id": "2",
+      "name": "الفقه الإسلامي للناشئة",
+      "description": "تعلم أساسيات الفقه الإسلامي والعبادات بأسلوب مبسط مناسب للناشئة",
+      "season_id": "1",
+      "start_date": "2025-01-15",
+      "end_date": "2025-04-15",
+      "num_lectures": 24,
+      "capacity": 25,
+      "price": 500,
+      "instructor_id": "ins2",
+      "enrolled_count": 20,
+      "is_active": true,
+      "thumbnail": "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "tags": ["فقه", "عبادات", "مبتدئ"],
+      "featured": true
+    },
+    {
+      "id": "3",
       "name": "أساسيات البرمجة للأطفال",
       "description": "تعلم أساسيات البرمجة بطريقة ممتعة وتفاعلية باستخدام أدوات بصرية مناسبة للأطفال",
-      "season_id": "1",
+      "season_id": "2",
       "start_date": "2025-01-15",
       "end_date": "2025-03-15",
       "num_lectures": 16,
       "capacity": 20,
       "price": 800,
-      "instructor_id": "1",
+      "instructor_id": "ins3",
       "enrolled_count": 15,
       "is_active": true,
-      "thumbnail": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      "tags": ["برمجة", "أطفال", "مبتدئين"],
+      "thumbnail": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "tags": ["برمجة", "أطفال", "مبتدئ"],
       "featured": true
-    },
-    {
-      "id": "2",
-      "name": "الرياضيات المتقدمة للمرحلة الإعدادية",
-      "description": "تطوير مهارات الرياضيات المتقدمة والتفكير المنطقي للطلاب في المرحلة الإعدادية",
-      "season_id": "2",
-      "start_date": "2025-02-01",
-      "end_date": "2025-04-30",
-      "num_lectures": 20,
-      "capacity": 15,
-      "price": 1200,
-      "instructor_id": "2",
-      "enrolled_count": 12,
-      "is_active": true,
-      "thumbnail": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      "tags": ["رياضيات", "إعدادي", "متقدم"],
-      "featured": true
-    },
-    {
-      "id": "3",
-      "name": "اللغة الإنجليزية للمبتدئين",
-      "description": "تعلم أساسيات اللغة الإنجليزية من خلال الألعاب والأنشطة التفاعلية",
-      "season_id": "1",
-      "start_date": "2025-01-20",
-      "end_date": "2025-03-20",
-      "num_lectures": 18,
-      "capacity": 25,
-      "price": 900,
-      "instructor_id": "3",
-      "enrolled_count": 20,
-      "is_active": true,
-      "thumbnail": "https://images.unsplash.com/photo-1544717297-fa95b6ee9643?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      "tags": ["لغة إنجليزية", "مبتدئين", "أطفال"],
-      "featured": false
     },
     {
       "id": "4",
-      "name": "الفنون والرسم الإبداعي",
-      "description": "تنمية المواهب الفنية والإبداعية من خلال تعلم تقنيات الرسم والألوان",
-      "season_id": "1",
-      "start_date": "2025-01-10",
-      "end_date": "2025-02-28",
-      "num_lectures": 12,
-      "capacity": 18,
-      "price": 600,
-      "instructor_id": "1",
-      "enrolled_count": 16,
+      "name": "الرياضيات المتقدمة",
+      "description": "تطوير مهارات الرياضيات المتقدمة والتفكير المنطقي للمرحلة الإعدادية والثانوية",
+      "season_id": "2",
+      "start_date": "2025-02-01",
+      "end_date": "2025-05-01",
+      "num_lectures": 32,
+      "capacity": 15,
+      "price": 1200,
+      "instructor_id": "ins4",
+      "enrolled_count": 12,
       "is_active": true,
-      "thumbnail": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      "tags": ["فنون", "رسم", "إبداع"],
-      "featured": true
+      "thumbnail": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "tags": ["رياضيات", "متقدم", "إعدادي"],
+      "featured": false
     },
     {
       "id": "5",
-      "name": "العلوم التطبيقية والتجارب",
-      "description": "استكشاف عالم العلوم من خلال التجارب العملية والأنشطة التطبيقية",
-      "season_id": "2",
-      "start_date": "2025-02-15",
-      "end_date": "2025-04-15",
-      "num_lectures": 14,
-      "capacity": 20,
-      "price": 1000,
-      "instructor_id": "2",
-      "enrolled_count": 8,
+      "name": "اللغة العربية وآدابها",
+      "description": "تقوية مهارات اللغة العربية من خلال النحو والصرف والبلاغة والأدب",
+      "season_id": "1",
+      "start_date": "2025-01-12",
+      "end_date": "2025-04-12",
+      "num_lectures": 30,
+      "capacity": 25,
+      "price": 700,
+      "instructor_id": "ins5",
+      "enrolled_count": 23,
       "is_active": true,
-      "thumbnail": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      "tags": ["علوم", "تجارب", "عملي"],
+      "thumbnail": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "tags": ["عربية", "أدب", "نحو"],
       "featured": true
+    }
+  ],
+  "users": [
+    {
+      "id": "u1",
+      "phone_number1": "01000000001",
+      "email": "m.ali@example.com",
+      "first_name": "محمد",
+      "last_name": "علي",
+      "role": "instructor",
+      "created_at": "2024-01-15T10:00:00Z"
     },
     {
-      "id": "6",
-      "name": "تطوير الشخصية والثقة بالنفس",
-      "description": "برنامج شامل لتطوير مهارات التواصل والثقة بالنفس للأطفال والمراهقين",
-      "season_id": "1",
-      "start_date": "2025-01-25",
-      "end_date": "2025-03-10",
-      "num_lectures": 10,
-      "capacity": 15,
-      "price": 750,
-      "instructor_id": "3",
-      "enrolled_count": 10,
-      "is_active": true,
-      "thumbnail": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      "tags": ["تطوير شخصية", "ثقة", "مهارات"],
-      "featured": false
+      "id": "u2",
+      "phone_number1": "01000000002",
+      "email": "salma@example.com",
+      "first_name": "سلمى",
+      "last_name": "حسن",
+      "role": "parent",
+      "created_at": "2024-02-01T10:00:00Z"
+    },
+    {
+      "id": "u3",
+      "phone_number1": "01000000003",
+      "email": "ahmed@example.com",
+      "first_name": "أحمد",
+      "last_name": "حسين",
+      "role": "student",
+      "created_at": "2024-01-20T10:00:00Z"
+    },
+    {
+      "id": "u4",
+      "phone_number1": "01000000004",
+      "email": "fatma.omar@example.com",
+      "first_name": "فاطمة",
+      "last_name": "عمر",
+      "role": "instructor",
+      "created_at": "2024-01-10T10:00:00Z"
+    },
+    {
+      "id": "u5",
+      "phone_number1": "01000000005",
+      "email": "kareem@example.com",
+      "first_name": "كريم",
+      "last_name": "محمود",
+      "role": "instructor",
+      "created_at": "2024-01-05T10:00:00Z"
+    },
+    {
+      "id": "u6",
+      "phone_number1": "01000000006",
+      "email": "nour@example.com",
+      "first_name": "نور",
+      "last_name": "أحمد",
+      "role": "parent",
+      "created_at": "2024-02-10T10:00:00Z"
+    },
+    {
+      "id": "u7",
+      "phone_number1": "01000000007",
+      "email": "sara@example.com",
+      "first_name": "سارة",
+      "last_name": "علي",
+      "role": "student",
+      "created_at": "2024-01-25T10:00:00Z"
     }
   ],
   "instructors": [
     {
-      "id": "1",
+      "id": "ins1",
       "user_id": "u1",
-      "first_name": "أحمد",
-      "last_name": "محمد",
-      "bio": "مطور برامج ومدرب معتمد في تعليم البرمجة للأطفال بخبرة 8 سنوات"
+      "bio": "محاضر في التجويد والقرآن الكريم، حافظ للقرآن الكريم مع إجازة في القراءات العشر",
+      "monthly_salary": 3000,
+      "hire_date": "2023-01-15",
+      "avg_rating": 9.2
     },
     {
-      "id": "2",
-      "user_id": "u2",
-      "first_name": "فاطمة",
-      "last_name": "علي",
-      "bio": "أستاذة رياضيات وعلوم بكالوريوس تربية جامعة القاهرة، خبرة 12 سنة"
+      "id": "ins2",
+      "user_id": "u4",
+      "bio": "أستاذة في الفقه الإسلامي، خريجة الأزهر الشريف، ماجستير في الفقه المقارن",
+      "monthly_salary": 2800,
+      "hire_date": "2023-02-01",
+      "avg_rating": 8.9
     },
     {
-      "id": "3",
-      "user_id": "u3",
-      "first_name": "محمود",
-      "last_name": "حسن",
-      "bio": "مدرس لغة إنجليزية ومدرب تنمية بشرية، ماجستير في اللغويات التطبيقية"
+      "id": "ins3",
+      "user_id": "u5",
+      "bio": "مطور برامج ومدرب معتمد في تعليم البرمجة للأطفال، خبرة 8 سنوات في التعليم التقني",
+      "monthly_salary": 3500,
+      "hire_date": "2023-01-20",
+      "avg_rating": 9.5
+    },
+    {
+      "id": "ins4",
+      "user_id": "u1",
+      "bio": "أستاذ رياضيات، بكالوريوس رياضيات جامعة القاهرة، خبرة 15 سنة في التدريس",
+      "monthly_salary": 3200,
+      "hire_date": "2022-09-01",
+      "avg_rating": 8.7
+    },
+    {
+      "id": "ins5",
+      "user_id": "u4",
+      "bio": "معلمة لغة عربية، ماجستير في الأدب العربي، متخصصة في النحو والصرف",
+      "monthly_salary": 2900,
+      "hire_date": "2023-03-01",
+      "avg_rating": 9.1
     }
   ],
-  "tags": [
+  "parents": [
     {
-      "id": "1",
-      "name": "برمجة"
+      "id": "p1",
+      "user_id": "u2"
     },
     {
-      "id": "2",
-      "name": "رياضيات"
+      "id": "p2",
+      "user_id": "u6"
+    }
+  ],
+  "children": [
+    {
+      "id": "c1",
+      "parent_id": "p1",
+      "first_name": "عمر",
+      "last_name": "أحمد",
+      "dob": "2012-05-12",
+      "unique_code": "CH001",
+      "status": "active",
+      "photo_url": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=80",
+      "created_at": "2024-01-15T10:00:00Z"
     },
     {
-      "id": "3",
-      "name": "لغة إنجليزية"
+      "id": "c2",
+      "parent_id": "p1",
+      "first_name": "ليلى",
+      "last_name": "أحمد",
+      "dob": "2010-08-23",
+      "unique_code": "CH002",
+      "status": "active",
+      "photo_url": "https://images.unsplash.com/photo-1494790108755-2616b332e234?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=80",
+      "created_at": "2024-01-15T10:00:00Z"
     },
     {
-      "id": "4",
-      "name": "علوم"
+      "id": "c3",
+      "parent_id": "p2",
+      "first_name": "يوسف",
+      "last_name": "محمد",
+      "dob": "2011-12-05",
+      "unique_code": "CH003",
+      "status": "active",
+      "photo_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=80",
+      "created_at": "2024-02-01T10:00:00Z"
+    }
+  ],
+  "student_users": [
+    {
+      "id": "s1",
+      "user_id": "u3",
+      "unique_code": "ST001"
     },
     {
-      "id": "5",
-      "name": "فنون"
+      "id": "s2",
+      "user_id": "u7",
+      "unique_code": "ST002"
+    }
+  ],
+  "lectures": [
+    {
+      "id": "lec1",
+      "course_id": "1",
+      "scheduled_at": "2025-11-02T10:00:00",
+      "lecture_number": 1,
+      "instructor_id": "ins1",
+      "status": "completed"
     },
     {
-      "id": "6",
-      "name": "تطوير شخصية"
+      "id": "lec2",
+      "course_id": "1",
+      "scheduled_at": "2025-11-09T10:00:00",
+      "lecture_number": 2,
+      "instructor_id": "ins1",
+      "status": "scheduled"
+    },
+    {
+      "id": "lec3",
+      "course_id": "2",
+      "scheduled_at": "2025-11-03T14:00:00",
+      "lecture_number": 1,
+      "instructor_id": "ins2",
+      "status": "completed"
+    },
+    {
+      "id": "lec4",
+      "course_id": "3",
+      "scheduled_at": "2025-11-04T16:00:00",
+      "lecture_number": 1,
+      "instructor_id": "ins3",
+      "status": "scheduled"
+    }
+  ],
+  "enrollments": [
+    {
+      "id": "e1",
+      "course_id": "1",
+      "student_id": "s1",
+      "enrolled_at": "2025-10-01T12:00:00",
+      "active": true,
+      "status": "active",
+      "created_by": "u1"
+    },
+    {
+      "id": "e2",
+      "course_id": "3",
+      "student_id": "s1",
+      "enrolled_at": "2025-10-05T12:00:00",
+      "active": true,
+      "status": "active",
+      "created_by": "u1"
+    },
+    {
+      "id": "e3",
+      "course_id": "1",
+      "child_id": "c1",
+      "enrolled_at": "2025-10-02T12:00:00",
+      "active": true,
+      "status": "active",
+      "created_by": "u1"
+    },
+    {
+      "id": "e4",
+      "course_id": "2",
+      "child_id": "c2",
+      "enrolled_at": "2025-10-03T12:00:00",
+      "active": true,
+      "status": "active",
+      "created_by": "u1"
+    }
+  ],
+  "lecture_attendances": [
+    {
+      "id": "la1",
+      "lecture_id": "lec1",
+      "student_id": "s1",
+      "present": true,
+      "rating": 9.5,
+      "marked_by": "u1",
+      "marked_at": "2025-11-02T11:30:00"
+    },
+    {
+      "id": "la2",
+      "lecture_id": "lec1",
+      "child_id": "c1",
+      "present": true,
+      "rating": 8.5,
+      "marked_by": "u1",
+      "marked_at": "2025-11-02T11:30:00"
+    },
+    {
+      "id": "la3",
+      "lecture_id": "lec3",
+      "child_id": "c2",
+      "present": false,
+      "rating": null,
+      "marked_by": "u4",
+      "marked_at": "2025-11-03T15:00:00"
+    }
+  ],
+  "exams": [
+    {
+      "id": "ex1",
+      "course_id": "1",
+      "name": "اختبار منتصف الفصل - التجويد",
+      "exam_type": "midterm",
+      "scheduled_date": "2025-11-15",
+      "total_marks": 100,
+      "description": "اختبار شامل على أحكام التجويد الأساسية",
+      "created_by": "u1"
+    },
+    {
+      "id": "ex2",
+      "course_id": "2",
+      "name": "امتحان الوضوء والصلاة",
+      "exam_type": "quiz",
+      "scheduled_date": "2025-11-10",
+      "total_marks": 50,
+      "description": "اختبار قصير على أحكام الوضوء والصلاة",
+      "created_by": "u4"
+    }
+  ],
+  "exam_results": [
+    {
+      "id": "er1",
+      "exam_id": "ex1",
+      "student_id": "s1",
+      "marks_obtained": 85,
+      "percentage": 85,
+      "notes": "أداء ممتاز",
+      "entered_by": "u1",
+      "entered_at": "2025-11-16T10:00:00"
+    },
+    {
+      "id": "er2",
+      "exam_id": "ex1",
+      "child_id": "c1",
+      "marks_obtained": 78,
+      "percentage": 78,
+      "notes": "أداء جيد جداً",
+      "entered_by": "u1",
+      "entered_at": "2025-11-16T10:05:00"
+    },
+    {
+      "id": "er3",
+      "exam_id": "ex2",
+      "child_id": "c2",
+      "marks_obtained": 42,
+      "percentage": 84,
+      "notes": "أداء ممتاز",
+      "entered_by": "u4",
+      "entered_at": "2025-11-11T14:00:00"
+    }
+  ],
+  "payments": [
+    {
+      "id": "pay1",
+      "enrollment_id": "e1",
+      "payer_student_id": "s1",
+      "amount": 600,
+      "method": "cash",
+      "status": "paid",
+      "payment_date": "2025-10-01T13:00:00",
+      "processed_by": "u1"
+    },
+    {
+      "id": "pay2",
+      "enrollment_id": "e3",
+      "payer_parent_id": "p1",
+      "amount": 600,
+      "method": "bank_transfer",
+      "status": "paid",
+      "payment_date": "2025-10-02T15:30:00",
+      "reference_number": "TRX123456789",
+      "processed_by": "u1"
+    },
+    {
+      "id": "pay3",
+      "enrollment_id": "e4",
+      "payer_parent_id": "p1",
+      "amount": 500,
+      "method": "instapay",
+      "status": "paid",
+      "payment_date": "2025-10-03T12:15:00",
+      "reference_number": "IP987654321",
+      "processed_by": "u1"
+    }
+  ],
+  "pending_enrollments": [
+    {
+      "id": "pe1",
+      "course_id": "4",
+      "parent_id": "p2",
+      "child_id": "c3",
+      "status": "pending",
+      "price": 1200,
+      "created_at": "2025-10-18T09:00:00",
+      "expires_at": "2025-10-25T23:59:59",
+      "notes": "طلب تسجيل في دورة الرياضيات المتقدمة"
+    }
+  ],
+  "student_instructor_ratings": [
+    {
+      "id": "sir1",
+      "course_id": "1",
+      "instructor_id": "ins1",
+      "student_id": "s1",
+      "rating": 9.5,
+      "feedback": "أستاذ ممتاز ومتمكن من المادة",
+      "rated_at": "2025-11-02T18:00:00"
+    },
+    {
+      "id": "sir2",
+      "course_id": "1",
+      "instructor_id": "ins1",
+      "child_id": "c1",
+      "rating": 9.0,
+      "feedback": "طريقة شرح رائعة ومناسبة للأطفال",
+      "rated_at": "2025-11-02T19:00:00"
     }
   ],
   "seasons": [
     {
       "id": "1",
-      "name": "الفصل الدراسي الثاني 2025",
+      "name": "الفصل الدراسي الشتوي 2025",
       "season_type": "school",
       "start_date": "2025-01-01",
-      "end_date": "2025-03-31"
+      "end_date": "2025-06-30",
+      "description": "الفصل الدراسي الشتوي للعام 2025",
+      "is_active": true
     },
     {
       "id": "2",
       "name": "دورة الربيع المكثفة 2025",
       "season_type": "summer_camp",
       "start_date": "2025-02-01",
-      "end_date": "2025-04-30"
+      "end_date": "2025-05-31",
+      "description": "دورة مكثفة في فصل الربيع",
+      "is_active": true
+    }
+  ],
+  "tags": [
+    {
+      "id": "1",
+      "name": "قرآن"
+    },
+    {
+      "id": "2",
+      "name": "تجويد"
+    },
+    {
+      "id": "3",
+      "name": "فقه"
+    },
+    {
+      "id": "4",
+      "name": "عبادات"
+    },
+    {
+      "id": "5",
+      "name": "برمجة"
+    },
+    {
+      "id": "6",
+      "name": "رياضيات"
+    },
+    {
+      "id": "7",
+      "name": "عربية"
+    },
+    {
+      "id": "8",
+      "name": "أدب"
     }
   ],
   "testimonials": [
@@ -202,33 +560,5 @@
     "students": 547,
     "active_courses": 28,
     "seasons_completed": 15
-  },
-  "users": [
-    {
-      "id": "u1",
-      "phone_number1": "+20123456789",
-      "email": "ahmed.mohamed@example.com",
-      "first_name": "أحمد",
-      "last_name": "محمد",
-      "role": "instructor"
-    },
-    {
-      "id": "u2",
-      "phone_number1": "+20987654321",
-      "email": "fatma.ali@example.com",
-      "first_name": "فاطمة",
-      "last_name": "علي",
-      "role": "instructor"
-    },
-    {
-      "id": "u3",
-      "phone_number1": "+20555666777",
-      "email": "mahmoud.hassan@example.com",
-      "first_name": "محمود",
-      "last_name": "حسن",
-      "role": "instructor"
-    }
-  ],
-  "children": [],
-  "pending_enrollments": []
+  }
 }
