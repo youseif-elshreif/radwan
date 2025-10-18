@@ -137,7 +137,7 @@ const Activities: React.FC = () => {
           >
             {activities.map((activity) => (
               <SwiperSlide key={activity.id}>
-                <div className="group relative bg-surface rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2">
+                <div className="group relative bg-surface rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 transform">
                   {/* Background Image */}
                   <div className="relative h-48 overflow-hidden">
                     <div

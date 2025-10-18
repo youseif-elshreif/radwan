@@ -56,22 +56,6 @@ const Hero: React.FC = () => {
             سجل الآن
           </Button>
         </div>
-
-        {/* Stats Preview */}
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 animate-scale-in">
-            <div className="text-2xl font-bold font-arabic">500+</div>
-            <div className="text-sm font-arabic">طالب مسجل</div>
-          </div>
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 animate-scale-in [animation-delay:.08s]">
-            <div className="text-2xl font-bold font-arabic">50+</div>
-            <div className="text-sm font-arabic">كورس متاح</div>
-          </div>
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 animate-scale-in [animation-delay:.16s]">
-            <div className="text-2xl font-bold font-arabic">10+</div>
-            <div className="text-sm font-arabic">سنوات خبرة</div>
-          </div>
-        </div>
       </div>
     </section>
   );

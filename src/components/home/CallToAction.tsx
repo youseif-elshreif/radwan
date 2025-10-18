@@ -36,7 +36,7 @@ const CallToAction: React.FC = () => {
               القرآن الكريم والعلوم الإسلامية
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-end mb-8">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
               <Button
                 variant="secondary"
                 size="lg"
@@ -58,7 +58,7 @@ const CallToAction: React.FC = () => {
             </div>
 
             {/* Contact Options */}
-            <div className="flex flex-wrap justify-center lg:justify-end gap-6 text-white/80">
+            <div className="flex flex-wrap justify-center lg:justify-start gap-6 text-white/80">
               <div className="flex items-center gap-2">
                 <FaPhone className="w-4 h-4" />
                 <span className="font-arabic text-sm">+966 50 123 4567</span>

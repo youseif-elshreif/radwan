@@ -41,9 +41,9 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({ onFiltersChange }) => {
     <section className="bg-surface py-8 border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-white rounded-xl shadow-sm border border-border p-6">
-          <h2 className="text-xl font-semibold text-text-primary font-arabic mb-6 text-right flex items-center justify-end gap-2">
-            <span>ابحث عن الكورس المناسب</span>
+          <h2 className="text-xl font-semibold text-text-primary font-arabic mb-6 text-right flex items-center justify-start gap-2">
             <FaFilter className="text-accent" />
+            <span>ابحث عن الكورس المناسب</span>
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -147,7 +147,7 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({ onFiltersChange }) => {
             <label className="block text-sm font-medium text-text-primary font-arabic mb-3 text-right">
               التخصصات
             </label>
-            <div className="flex flex-wrap gap-2 justify-end">
+            <div className="flex flex-wrap gap-2 justify-start">
               {categories.map((category) => (
                 <button
                   key={category}

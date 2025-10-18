@@ -74,7 +74,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
         {/* Tags */}
         {course.tags && course.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1 mb-3 justify-end">
+          <div className="flex flex-wrap gap-1 mb-3 justify-start">
             {course.tags.slice(0, 3).map((tag, index) => (
               <Badge key={index} variant="default" className="text-xs">
                 {tag}
@@ -91,25 +91,25 @@ const CourseCard: React.FC<CourseCardProps> = ({
         {/* Course Info */}
         <div className="space-y-2 mb-4 text-right">
           {course.start_date && (
-            <div className="text-sm text-text-secondary font-arabic flex items-center justify-end gap-1">
-              <span>يبدأ: {formatDate(course.start_date)}</span>
+            <div className="text-sm text-text-secondary font-arabic flex items-center justify-start gap-1">
               <FaCalendar className="text-accent" />
+              <span>يبدأ: {formatDate(course.start_date)}</span>
             </div>
           )}
 
           {course.num_lectures && (
-            <div className="text-sm text-text-secondary font-arabic flex items-center justify-end gap-1">
-              <span>{course.num_lectures} محاضرة</span>
+            <div className="text-sm text-text-secondary font-arabic flex items-center justify-start gap-1">
               <FaBook className="text-accent" />
+              <span>{course.num_lectures} محاضرة</span>
             </div>
           )}
 
           {course.capacity && (
-            <div className="text-sm text-text-secondary font-arabic flex items-center justify-end gap-1">
+            <div className="text-sm text-text-secondary font-arabic flex items-center justify-start gap-1">
+              <FaUsers className="text-accent" />
               <span>
                 الأماكن المتاحة: {seatsLeft} من {course.capacity}
               </span>
-              <FaUsers className="text-accent" />
             </div>
           )}
         </div>
@@ -122,14 +122,14 @@ const CourseCard: React.FC<CourseCardProps> = ({
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-2 justify-end">
+        <div className="flex gap-2 justify-start">
           <Button
             variant="outline"
             size="sm"
             className="flex-1 flex items-center justify-center gap-1"
           >
-            <span>عرض الكورس</span>
             <FaEye />
+            <span>عرض الكورس</span>
           </Button>
 
           <Button
@@ -139,8 +139,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
             onClick={() => onEnroll(course.id)}
             disabled={seatsLeft === 0}
           >
-            <span>{seatsLeft === 0 ? "مكتمل" : "سجل الآن"}</span>
             {seatsLeft !== 0 && <FaUserPlus />}
+            <span>{seatsLeft === 0 ? "مكتمل" : "سجل الآن"}</span>
           </Button>
         </div>
       </div>

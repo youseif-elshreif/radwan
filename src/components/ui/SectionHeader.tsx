@@ -64,7 +64,7 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
       {/* Bottom decorative element */}
       <div
         className={`mt-6 ${
-          alignment === "center" ? "flex justify-center" : "flex justify-end"
+          alignment === "center" ? "flex justify-center" : "flex justify-start"
         }`}
       >
         <div className="flex items-center gap-2">

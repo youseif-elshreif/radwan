@@ -33,13 +33,13 @@ const Testimonials: React.FC = () => {
   }, []);
 
   const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }, (_, i) => (
+    return Array.from({ length: 5 }, (_, i) =>
       i < rating ? (
         <FaStar key={i} className="w-5 h-5 text-yellow-400" />
       ) : (
         <FaRegStar key={i} className="w-5 h-5 text-gray-300" />
       )
-    ));
+    );
   };
 
   if (loading) {
@@ -148,12 +148,15 @@ const Testimonials: React.FC = () => {
                   </div>
 
                   {/* Rating */}
-                  <div className="flex justify-end mb-4">
+                  <div className="flex justify-start mb-4">
                     {renderStars(testimonial.rating)}
                   </div>
 
                   {/* Author */}
-                  <div className="flex items-center gap-3 justify-end">
+                  <div className="flex items-center gap-3 justify-start">
+                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                      <span className="text-xl">👤</span>
+                    </div>
                     <div className="text-right">
                       <div className="font-semibold text-text-primary font-arabic">
                         {testimonial.name}
@@ -163,9 +166,6 @@ const Testimonials: React.FC = () => {
                           {testimonial.role}
                         </div>
                       )}
-                    </div>
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                      <span className="text-xl">👤</span>
                     </div>
                   </div>
                 </Card>
