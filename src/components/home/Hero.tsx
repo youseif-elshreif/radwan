@@ -10,7 +10,7 @@ const Hero: React.FC = () => {
       {/* Background Image Overlay */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-        style={{ backgroundImage: "url(/imgs/hero.jpg)" }}
+        style={{ backgroundImage: "url(https://images.unsplash.com/photo-1564769625905-50e93615e769?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80)" }}
       ></div>
 
       {/* Islamic geometric pattern overlay (lightweight SVG) */}

@@ -38,7 +38,7 @@ const CallToAction: React.FC = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
               <Button
-                variant="secondary"
+                variant="primary"
                 size="lg"
                 className="bg-accent hover:bg-accent-100 text-white border-none shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 min-w-48"
               >
@@ -48,11 +48,7 @@ const CallToAction: React.FC = () => {
                 </span>
               </Button>
 
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-white text-white hover:bg-white hover:text-primary shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 min-w-48"
-              >
+              <Button variant="outline" size="lg">
                 جرب درس تجريبي
               </Button>
             </div>
@@ -77,15 +73,18 @@ const CallToAction: React.FC = () => {
           {/* Image Side */}
           <div className="relative">
             <div className="relative bg-white/10 backdrop-blur-sm rounded-3xl p-8 shadow-2xl">
-              {/* Placeholder for Image */}
-              <div className="aspect-square bg-white/20 rounded-2xl flex items-center justify-center text-white/60">
-                <div className="text-center">
-                  <div className="w-24 h-24 bg-white/20 rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <span className="text-4xl">📚</span>
-                  </div>
-                  <p className="font-arabic text-lg">صورة تعليمية ملهمة</p>
-                  <p className="font-arabic text-sm opacity-75 mt-2">
-                    (سيتم إضافة صورة حقيقية للطلاب)
+              {/* Image from Unsplash */}
+              <div
+                className="aspect-square rounded-2xl bg-cover bg-center relative overflow-hidden"
+                style={{
+                  backgroundImage:
+                    "url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')",
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                <div className="absolute bottom-4 right-4 text-white">
+                  <p className="font-arabic text-sm font-medium">
+                    طلاب يتعلمون القرآن
                   </p>
                 </div>
               </div>

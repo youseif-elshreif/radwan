@@ -8,7 +8,7 @@
 :root {
   --background: #f9f9f9;
   --surface: #ffffff;
-  --primary: #336154;
+  --primary: rgb(11 22 19);
   --primary-100: #4d7f6f;
   --accent: #e47a2e;
   --accent-100: #f29b56;

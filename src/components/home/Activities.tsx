@@ -22,7 +22,8 @@ const Activities: React.FC = () => {
       description:
         "برامج متدرجة لحفظ القرآن الكريم مع التجويد والتفسير المبسط للأطفال",
       icon: <FaBookOpen className="w-8 h-8" />,
-      image: "/imgs/quran-circle.jpg",
+      image:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       color: "from-primary to-primary-100",
     },
     {
@@ -31,7 +32,8 @@ const Activities: React.FC = () => {
       description:
         "أنشطة تفاعلية لتعلم النحو والصرف والأدب العربي بطرق ممتعة ومبتكرة",
       icon: <MdLibraryBooks className="w-8 h-8" />,
-      image: "/imgs/arabic-workshop.jpg",
+      image:
+        "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       color: "from-accent to-accent-100",
     },
     {
@@ -40,7 +42,8 @@ const Activities: React.FC = () => {
       description:
         "برامج رياضية متنوعة تهدف لبناء الجسم السليم والروح الرياضية الإسلامية",
       icon: <FaFootballBall className="w-8 h-8" />,
-      image: "/imgs/sports-activity.jpg",
+      image:
+        "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       color: "from-success to-green-400",
     },
     {
@@ -49,7 +52,8 @@ const Activities: React.FC = () => {
       description:
         "تعلم الخط العربي والزخرفة الإسلامية والفنون التراثية الأصيلة",
       icon: <MdPalette className="w-8 h-8" />,
-      image: "/imgs/islamic-art.jpg",
+      image:
+        "https://images.unsplash.com/photo-1544717297-fa95b6ee9643?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       color: "from-purple-500 to-purple-400",
     },
     {
@@ -58,7 +62,8 @@ const Activities: React.FC = () => {
       description:
         "مسابقات متنوعة في القرآن والسنة والثقافة الإسلامية لتحفيز الطلاب",
       icon: <FaGamepad className="w-8 h-8" />,
-      image: "/imgs/competitions.jpg",
+      image:
+        "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       color: "from-yellow-500 to-yellow-400",
     },
     {
@@ -66,7 +71,8 @@ const Activities: React.FC = () => {
       title: "النشاطات الاجتماعية",
       description: "فعاليات تطوعية وخيرية لغرس قيم العطاء والتكافل الاجتماعي",
       icon: <FaUsers className="w-8 h-8" />,
-      image: "/imgs/social-activities.jpg",
+      image:
+        "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       color: "from-blue-500 to-blue-400",
     },
   ];

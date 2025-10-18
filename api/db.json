@@ -13,7 +13,7 @@
       "instructor_id": "1",
       "enrolled_count": 15,
       "is_active": true,
-      "thumbnail": "/imgs/course-1.jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       "tags": ["برمجة", "أطفال", "مبتدئين"],
       "featured": true
     },
@@ -30,7 +30,7 @@
       "instructor_id": "2",
       "enrolled_count": 12,
       "is_active": true,
-      "thumbnail": "/imgs/course-2.jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       "tags": ["رياضيات", "إعدادي", "متقدم"],
       "featured": true
     },
@@ -47,7 +47,7 @@
       "instructor_id": "3",
       "enrolled_count": 20,
       "is_active": true,
-      "thumbnail": "/imgs/course-3.jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1544717297-fa95b6ee9643?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       "tags": ["لغة إنجليزية", "مبتدئين", "أطفال"],
       "featured": false
     },
@@ -64,7 +64,7 @@
       "instructor_id": "1",
       "enrolled_count": 16,
       "is_active": true,
-      "thumbnail": "/imgs/course-4.jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       "tags": ["فنون", "رسم", "إبداع"],
       "featured": true
     },
@@ -81,7 +81,7 @@
       "instructor_id": "2",
       "enrolled_count": 8,
       "is_active": true,
-      "thumbnail": "/imgs/course-5.jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       "tags": ["علوم", "تجارب", "عملي"],
       "featured": true
     },
@@ -98,7 +98,7 @@
       "instructor_id": "3",
       "enrolled_count": 10,
       "is_active": true,
-      "thumbnail": "/imgs/course-6.jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       "tags": ["تطوير شخصية", "ثقة", "مهارات"],
       "featured": false
     }
