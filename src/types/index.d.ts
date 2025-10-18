@@ -117,3 +117,34 @@ export interface BadgeProps {
   variant?: "default" | "primary" | "secondary" | "success" | "error";
   className?: string;
 }
+
+export interface LoginFormData {
+  email: string;
+  password: string;
+  rememberMe?: boolean;
+}
+
+export interface RegisterFormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  phoneNumber?: string;
+  role: "student" | "parent";
+  acceptTerms: boolean;
+}
+
+export interface CourseFilters {
+  category?: string;
+  level?: string;
+  priceRange?: { min: number; max: number };
+  search?: string;
+}
+
+export interface SectionHeaderProps {
+  title: string;
+  subtitle?: string;
+  accentWord?: string;
+  className?: string;
+}

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Button from "../ui/Button";
 import { HiMenu, HiX } from "react-icons/hi";
 
@@ -9,11 +10,11 @@ const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
-    { href: "#", label: "الرئيسية", active: true },
-    { href: "#about", label: "عن الأكاديمية" },
-    { href: "#activities", label: "الأنشطة" },
-    { href: "#courses", label: "الكورسات" },
-    { href: "#contact", label: "تواصل" },
+    { href: "/", label: "الرئيسية", active: false },
+    { href: "/courses", label: "الكورسات" },
+    { href: "/#about", label: "عن الأكاديمية" },
+    { href: "/#activities", label: "الأنشطة" },
+    { href: "/#contact", label: "تواصل" },
   ];
 
   return (
@@ -35,7 +36,7 @@ const Navbar: React.FC = () => {
           <div className="hidden md:block">
             <div className="mr-10 flex items-baseline space-x-reverse space-x-8">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.label}
                   href={link.href}
                   aria-current={link.active ? "page" : undefined}
@@ -44,16 +45,23 @@ const Navbar: React.FC = () => {
                   }`}
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
 
           {/* Login Button */}
-          <div className="hidden md:block">
-            <Button variant="outline" size="sm">
-              تسجيل الدخول
-            </Button>
+          <div className="hidden md:flex items-center gap-3">
+            <Link href="/login">
+              <Button variant="outline" size="sm">
+                تسجيل الدخول
+              </Button>
+            </Link>
+            <Link href="/register">
+              <Button variant="primary" size="sm">
+                إنشاء حساب
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -78,7 +86,7 @@ const Navbar: React.FC = () => {
       <div className={`${isMenuOpen ? "block" : "hidden"} md:hidden`}>
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-surface/95 backdrop-blur-md border-t border-border/70">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.label}
               href={link.href}
               className={`block px-3 py-2 rounded-md text-base font-medium font-arabic transition-colors ${
@@ -88,12 +96,19 @@ const Navbar: React.FC = () => {
               }`}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
-          <div className="mt-4 px-3">
-            <Button variant="outline" size="sm" className="w-full">
-              تسجيل الدخول
-            </Button>
+          <div className="mt-4 px-3 space-y-2">
+            <Link href="/login" className="block">
+              <Button variant="outline" size="sm" className="w-full">
+                تسجيل الدخول
+              </Button>
+            </Link>
+            <Link href="/register" className="block">
+              <Button variant="primary" size="sm" className="w-full">
+                إنشاء حساب
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
