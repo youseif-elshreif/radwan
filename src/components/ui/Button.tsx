@@ -1,6 +1,16 @@
 import React from "react";
-import { ButtonProps } from "@/types";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+
+interface ButtonProps {
+  variant?: "primary" | "secondary" | "outline" | "ghost";
+  size?: "sm" | "md" | "lg";
+  disabled?: boolean;
+  loading?: boolean;
+  children: React.ReactNode;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  className?: string;
+  type?: "button" | "submit" | "reset";
+}
 
 const Button: React.FC<ButtonProps> = ({
   variant = "primary",

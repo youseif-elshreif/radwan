@@ -1,5 +1,10 @@
 import React from "react";
-import { CardProps } from "@/types";
+
+interface CardProps {
+  children: React.ReactNode;
+  className?: string;
+  hoverable?: boolean;
+}
 
 const Card: React.FC<CardProps> = ({
   children,

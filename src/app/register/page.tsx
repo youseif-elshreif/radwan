@@ -7,20 +7,21 @@ import Container from "@/components/common/Container";
 import FormWrapper from "@/components/common/FormWrapper";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
-import { RegisterFormData } from "@/types";
+import { RegisterFormData } from "@/types/auth.types";
 import { FiEye, FiEyeOff, FiUser, FiUsers } from "react-icons/fi";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
 
 const RegisterPage: React.FC = () => {
   const [formData, setFormData] = useState<RegisterFormData>({
-    firstName: "",
-    lastName: "",
+    name: "",
+    phone: "",
     email: "",
     password: "",
     confirmPassword: "",
-    phoneNumber: "",
-    role: "student",
-    acceptTerms: false,
+    numOfPartsofQuran: 0,
+    age: 0,
+    country: "مصر",
+    quranLevel: "",
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -32,8 +33,15 @@ const RegisterPage: React.FC = () => {
     (field: keyof RegisterFormData) =>
     (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
       const target = e.target as HTMLInputElement;
-      const value = target.type === "checkbox" ? target.checked : target.value;
-      setFormData((prev) => ({
+      let value: string | number | boolean = target.value;
+      
+      if (target.type === "checkbox") {
+        value = target.checked;
+      } else if (field === "numOfPartsofQuran" || field === "age") {
+        value = parseInt(target.value) || 0;
+      }
+      
+      setFormData((prev: RegisterFormData) => ({
         ...prev,
         [field]: value,
       }));
@@ -51,12 +59,8 @@ const RegisterPage: React.FC = () => {
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {};
 
-    if (!formData.firstName.trim()) {
-      newErrors.firstName = "الاسم الأول مطلوب";
-    }
-
-    if (!formData.lastName.trim()) {
-      newErrors.lastName = "اسم العائلة مطلوب";
+    if (!formData.name.trim()) {
+      newErrors.name = "الاسم مطلوب";
     }
 
     if (!formData.email.trim()) {
@@ -75,12 +79,14 @@ const RegisterPage: React.FC = () => {
       newErrors.confirmPassword = "كلمة المرور غير متطابقة";
     }
 
-    if (formData.phoneNumber && !/^[0-9+\-\s()]+$/.test(formData.phoneNumber)) {
-      newErrors.phoneNumber = "رقم الهاتف غير صحيح";
+    if (!formData.phone.trim()) {
+      newErrors.phone = "رقم الهاتف مطلوب";
+    } else if (!/^[0-9+\-\s()]+$/.test(formData.phone)) {
+      newErrors.phone = "رقم الهاتف غير صحيح";
     }
 
-    if (!formData.acceptTerms) {
-      newErrors.acceptTerms = "يجب قبول الشروط والأحكام";
+    if (formData.age < 1 || formData.age > 100) {
+      newErrors.age = "العمر يجب أن يكون بين 1 و 100";
     }
 
     setErrors(newErrors);
@@ -128,33 +134,19 @@ const RegisterPage: React.FC = () => {
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name Fields */}
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    الاسم الأول
-                  </label>
-                  <Input
-                    type="text"
-                    placeholder="الاسم الأول"
-                    value={formData.firstName}
-                    onChange={handleInputChange("firstName")}
-                    error={errors.firstName}
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    اسم العائلة
-                  </label>
-                  <Input
-                    type="text"
-                    placeholder="اسم العائلة"
-                    value={formData.lastName}
-                    onChange={handleInputChange("lastName")}
-                    error={errors.lastName}
-                    required
-                  />
-                </div>
+              {/* Name Field */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  الاسم الكامل
+                </label>
+                <Input
+                  type="text"
+                  placeholder="الاسم الكامل"
+                  value={formData.name}
+                  onChange={handleInputChange("name")}
+                  error={errors.name}
+                  required
+                />
               </div>
 
               {/* Email Field */}
@@ -175,14 +167,15 @@ const RegisterPage: React.FC = () => {
               {/* Phone Number */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  رقم الهاتف (اختياري)
+                  رقم الهاتف
                 </label>
                 <Input
                   type="tel"
                   placeholder="رقم الهاتف"
-                  value={formData.phoneNumber}
-                  onChange={handleInputChange("phoneNumber")}
-                  error={errors.phoneNumber}
+                  value={formData.phone}
+                  onChange={handleInputChange("phone")}
+                  error={errors.phone}
+                  required
                 />
               </div>
 
@@ -293,38 +286,7 @@ const RegisterPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Terms Acceptance */}
-              <div>
-                <label className="flex items-start gap-3">
-                  <input
-                    type="checkbox"
-                    checked={formData.acceptTerms}
-                    onChange={handleInputChange("acceptTerms")}
-                    className="mt-1 rounded border-gray-300 text-primary focus:ring-primary"
-                  />
-                  <span className="text-sm text-gray-600 leading-relaxed">
-                    أوافق على{" "}
-                    <Link
-                      href="/terms"
-                      className="text-primary hover:text-accent"
-                    >
-                      الشروط والأحكام
-                    </Link>{" "}
-                    و{" "}
-                    <Link
-                      href="/privacy"
-                      className="text-primary hover:text-accent"
-                    >
-                      سياسة الخصوصية
-                    </Link>
-                  </span>
-                </label>
-                {errors.acceptTerms && (
-                  <p className="mt-1 text-sm text-red-600">
-                    {errors.acceptTerms}
-                  </p>
-                )}
-              </div>
+
 
               {/* Submit Button */}
               <Button
