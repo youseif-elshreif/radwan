@@ -8,7 +8,7 @@ import Input from "@/components/ui/Input";
 import { LoginCredentials, AuthResponse } from "@/types";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
-import { loginStudentOrParent, loginInstructor } from "@/services/api";
+import { authApi } from "@/api/auth";
 
 interface LoginFormProps {
   role: "student" | "parent" | "instructor";
@@ -90,9 +90,9 @@ const LoginForm: React.FC<LoginFormProps> = ({
       let response: AuthResponse;
 
       if (role === "instructor") {
-        response = await loginInstructor(formData);
+        response = await authApi.loginInstructor(formData);
       } else {
-        response = await loginStudentOrParent(formData);
+        response = await authApi.loginStudentOrParent(formData);
       }
 
       if (response.success) {

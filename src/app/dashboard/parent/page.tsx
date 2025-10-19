@@ -6,7 +6,7 @@ import Container from "@/components/common/Container";
 import ParentOverview from "@/components/dashboard/ParentOverview";
 import ParentChildrenList from "@/components/dashboard/ParentChildrenList";
 import { ParentDashboardData } from "@/types";
-import { getParentDashboard } from "@/services/api";
+import { dashboardApi } from "@/api/dashboard";
 import { FiDollarSign, FiClock, FiCheckCircle, FiX } from "react-icons/fi";
 import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
@@ -33,7 +33,7 @@ const ParentDashboardPage: React.FC = () => {
         // Get parent ID (mock for now)
         const parentId = "p1"; // In real app, get from user data
 
-        const data = await getParentDashboard(parentId);
+        const data = await dashboardApi.getParentDashboard(parentId);
         setDashboardData(data);
       } catch (error) {
         console.error("Failed to load dashboard:", error);

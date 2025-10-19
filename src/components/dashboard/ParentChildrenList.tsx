@@ -11,7 +11,7 @@ import {
   FiChevronDown,
   FiChevronUp,
 } from "react-icons/fi";
-import { calculateAge } from "@/services/api";
+import { utilsApi } from "@/api/utils";
 
 interface ParentChildrenListProps {
   childrenList: Child[];
@@ -59,7 +59,7 @@ const ParentChildrenList: React.FC<ParentChildrenListProps> = ({
         {childrenList.map((child: Child) => {
           const childEnrollments = getChildEnrollments(child.id);
           const isExpanded = expandedChild === child.id;
-          const age = calculateAge(child.dob);
+          const age = utilsApi.calculateAge(child.dob);
 
           return (
             <Card key={child.id} className="overflow-hidden">

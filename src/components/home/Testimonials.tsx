@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Card from "../ui/Card";
 import { Testimonial } from "@/types";
-import { getTestimonials } from "@/utils/api";
+import { testimonialsApi } from "@/api/testimonials";
 import SectionHeader from "../ui/SectionHeader";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
@@ -20,10 +20,45 @@ const Testimonials: React.FC = () => {
     const loadTestimonials = async () => {
       try {
         setLoading(true);
-        const data = await getTestimonials();
-        setTestimonials(data);
+        const data = await testimonialsApi.getTestimonials();
+        setTestimonials(data || []);
       } catch (error) {
         console.error("Error loading testimonials:", error);
+        // Use fallback data if API fails
+        setTestimonials([
+          {
+            id: "1",
+            name: "أحمد محمد",
+            role: "طالب",
+            rating: 5,
+            quote:
+              "تجربة رائعة! تعلمت الكثير من خلال كورس البرمجة والمدرسين محترفين جداً. أنصح الجميع بهذه الأكاديمية.",
+          },
+          {
+            id: "2",
+            name: "فاطمة علي",
+            role: "ولي أمر",
+            rating: 5,
+            quote:
+              "ابنتي استفادت كثيراً من كورس البرمجة. أصبحت تحب التكنولوجيا أكثر وتطور مهاراتها باستمرار.",
+          },
+          {
+            id: "3",
+            name: "محمد حسام",
+            role: "طالب",
+            rating: 4,
+            quote:
+              "كورس القرآن الكريم ممتاز وساعدني كثيراً في تحسين تلاوتي وحفظ سور جديدة.",
+          },
+          {
+            id: "4",
+            name: "أم يوسف",
+            role: "ولي أمر",
+            rating: 5,
+            quote:
+              "أولادي يحبون الدروس هنا والمدرسين صبورين ومتفهمين لاحتياجات الأطفال.",
+          },
+        ]);
       } finally {
         setLoading(false);
       }

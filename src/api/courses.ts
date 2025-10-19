@@ -8,7 +8,12 @@ export const coursesApi = {
       const params = new URLSearchParams();
 
       if (filters?.category) {
-        params.append("tags_like", filters.category);
+        // Handle array of categories
+        if (Array.isArray(filters.category)) {
+          filters.category.forEach((cat) => params.append("tags_like", cat));
+        } else {
+          params.append("tags_like", filters.category);
+        }
       }
 
       if (filters?.search) {
@@ -71,6 +76,39 @@ export const coursesApi = {
       return uniqueCategories;
     } catch (error) {
       console.error("Error fetching categories:", error);
+      throw error;
+    }
+  },
+
+  // Get all seasons for filter dropdown
+  getSeasons: async () => {
+    try {
+      const response = await apiClient.get("/seasons");
+      return response.data;
+    } catch (error) {
+      console.error("Failed to fetch seasons:", error);
+      throw error;
+    }
+  },
+
+  // Get all tags for filter chips
+  getTags: async () => {
+    try {
+      const response = await apiClient.get("/tags");
+      return response.data;
+    } catch (error) {
+      console.error("Failed to fetch tags:", error);
+      throw error;
+    }
+  },
+
+  // Get all instructors
+  getInstructors: async () => {
+    try {
+      const response = await apiClient.get("/instructors");
+      return response.data;
+    } catch (error) {
+      console.error("Failed to fetch instructors:", error);
       throw error;
     }
   },

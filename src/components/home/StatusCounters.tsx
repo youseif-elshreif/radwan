@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Card from "../ui/Card";
 import { Stats } from "@/types";
-import { getStats } from "@/utils/api";
+import { statsApi } from "@/api/stats";
 import SectionHeader from "../ui/SectionHeader";
 import { FaUsers, FaGraduationCap, FaStar } from "react-icons/fa";
 
@@ -15,7 +15,7 @@ const StatusCounters: React.FC = () => {
     const loadStats = async () => {
       try {
         setLoading(true);
-        const data = await getStats();
+        const data = await statsApi.getStats();
         setStats(data);
       } catch (error) {
         console.error("Error loading stats:", error);

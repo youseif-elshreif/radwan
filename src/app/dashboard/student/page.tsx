@@ -7,7 +7,7 @@ import StudentOverview from "@/components/dashboard/StudentOverview";
 import StudentCoursesList from "@/components/dashboard/StudentCoursesList";
 import StudentProgressCard from "@/components/dashboard/StudentProgressCard";
 import { StudentDashboardData, Notification } from "@/types";
-import { getStudentDashboard } from "@/services/api";
+import { dashboardApi } from "@/api/dashboard";
 import { FiBell, FiX } from "react-icons/fi";
 import Card from "@/components/ui/Card";
 
@@ -33,7 +33,7 @@ const StudentDashboardPage: React.FC = () => {
         // Get student ID (mock for now)
         const studentId = "s1"; // In real app, get from user data
 
-        const data = await getStudentDashboard(studentId);
+        const data = await dashboardApi.getStudentDashboard(studentId);
         setDashboardData(data);
         setNotifications(data.notifications);
       } catch (error) {

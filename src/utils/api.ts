@@ -9,7 +9,8 @@ import {
 } from "./authUtils";
 
 // API Base URL from environment variables
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "/api"; // Changed to use json-server proxy
+export const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
 // Create axios instance
 const api = axios.create({
@@ -136,112 +137,3 @@ api.interceptors.response.use(
 );
 
 export default api;
-
-// ======================================
-// Al-Radwan Academy API Functions
-// ======================================
-
-import { Course, Testimonial, Stats } from "@/types";
-
-/**
- * Get featured courses for the homepage
- */
-export const getFeaturedCourses = async (): Promise<Course[]> => {
-  try {
-    const response = await api.get("/courses?featured=true");
-    return response.data;
-  } catch (error) {
-    console.error("Failed to fetch featured courses:", error);
-    throw error;
-  }
-};
-
-/**
- * Get courses with optional query parameters for filtering
- */
-export const getCourses = async (
-  query?: Record<string, string | number>
-): Promise<Course[]> => {
-  try {
-    const params = new URLSearchParams();
-    if (query) {
-      Object.entries(query).forEach(([key, value]) => {
-        params.append(key, String(value));
-      });
-    }
-
-    const queryString = params.toString();
-    const url = queryString ? `/courses?${queryString}` : "/courses";
-
-    const response = await api.get(url);
-    return response.data;
-  } catch (error) {
-    console.error("Failed to fetch courses:", error);
-    throw error;
-  }
-};
-
-/**
- * Get testimonials for the homepage
- */
-export const getTestimonials = async (): Promise<Testimonial[]> => {
-  try {
-    const response = await api.get("/testimonials");
-    return response.data;
-  } catch (error) {
-    console.error("Failed to fetch testimonials:", error);
-    throw error;
-  }
-};
-
-/**
- * Get statistics for counters on homepage
- */
-export const getStats = async (): Promise<Stats> => {
-  try {
-    const response = await api.get("/stats");
-    return response.data;
-  } catch (error) {
-    console.error("Failed to fetch stats:", error);
-    throw error;
-  }
-};
-
-/**
- * Get all seasons for filter dropdown
- */
-export const getSeasons = async () => {
-  try {
-    const response = await api.get("/seasons");
-    return response.data;
-  } catch (error) {
-    console.error("Failed to fetch seasons:", error);
-    throw error;
-  }
-};
-
-/**
- * Get all tags for filter chips
- */
-export const getTags = async () => {
-  try {
-    const response = await api.get("/tags");
-    return response.data;
-  } catch (error) {
-    console.error("Failed to fetch tags:", error);
-    throw error;
-  }
-};
-
-/**
- * Get all instructors
- */
-export const getInstructors = async () => {
-  try {
-    const response = await api.get("/instructors");
-    return response.data;
-  } catch (error) {
-    console.error("Failed to fetch instructors:", error);
-    throw error;
-  }
-};

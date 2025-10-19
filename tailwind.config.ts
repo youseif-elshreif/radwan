@@ -15,7 +15,7 @@ const config: Config = {
           100: "#4d7f6f",
         },
         accent: {
-          DEFAULT: "#e47a2e",
+          DEFAULT: "rgb(204, 170, 119)",
           100: "#f29b56",
         },
         background: "#f9f9f9",

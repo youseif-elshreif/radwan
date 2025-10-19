@@ -7,7 +7,7 @@ import InstructorOverview from "@/components/dashboard/InstructorOverview";
 import InstructorCoursesList from "@/components/dashboard/InstructorCoursesList";
 import InstructorAttendancePanel from "@/components/dashboard/InstructorAttendancePanel";
 import { InstructorDashboardData, Lecture } from "@/types";
-import { getInstructorDashboard } from "@/services/api";
+import { dashboardApi } from "@/api/dashboard";
 import { FiBarChart, FiTrendingUp } from "react-icons/fi";
 import Card from "@/components/ui/Card";
 
@@ -34,7 +34,7 @@ const InstructorDashboardPage: React.FC = () => {
         // Get instructor ID (mock for now)
         const instructorId = "ins1"; // In real app, get from user data
 
-        const data = await getInstructorDashboard(instructorId);
+        const data = await dashboardApi.getInstructorDashboard(instructorId);
         setDashboardData(data);
       } catch (error) {
         console.error("Failed to load dashboard:", error);

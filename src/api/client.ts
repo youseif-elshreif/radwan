@@ -1,8 +1,11 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 
-// Create axios instance with base configuration
+// API Base URL from environment variables
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "/api";
+
+// Create axios instance
 const apiClient: AxiosInstance = axios.create({
-  baseURL: "/api", // This will be proxied to json-server via next.config.ts
+  baseURL: API_BASE_URL,
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
