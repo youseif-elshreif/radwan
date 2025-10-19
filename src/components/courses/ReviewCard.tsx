@@ -8,9 +8,11 @@ interface ReviewCardProps {
 const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, i) => (
-      <span 
-        key={i} 
-        className={`text-lg ${i < rating ? 'text-yellow-500' : 'text-gray-300'}`}
+      <span
+        key={i}
+        className={`text-lg ${
+          i < rating ? "text-yellow-500" : "text-gray-300"
+        }`}
       >
         ⭐
       </span>
@@ -25,12 +27,10 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
         </div>
         <div>
           <h4 className="font-medium text-text">{review.student}</h4>
-          <div className="flex gap-1 mt-1">
-            {renderStars(review.rating)}
-          </div>
+          <div className="flex gap-1 mt-1">{renderStars(review.rating)}</div>
         </div>
       </div>
-      
+
       <blockquote className="text-text-muted leading-relaxed">
         &ldquo;{review.comment}&rdquo;
       </blockquote>

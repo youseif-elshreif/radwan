@@ -7,7 +7,7 @@ const CourseSkeleton: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Image Skeleton */}
             <div className="aspect-video bg-gray-300 rounded-2xl"></div>
-            
+
             {/* Content Skeleton */}
             <div className="space-y-6">
               <div className="w-20 h-6 bg-gray-300 rounded"></div>

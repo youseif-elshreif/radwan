@@ -6,9 +6,9 @@ interface InstructorCardProps {
   // يمكن إضافة المزيد من البيانات لاحقاً من جدول المدرسين
 }
 
-const InstructorCard: React.FC<InstructorCardProps> = ({ 
+const InstructorCard: React.FC<InstructorCardProps> = ({
   instructor_name,
-  instructor_id 
+  instructor_id,
 }) => {
   return (
     <Card className="p-6">
@@ -24,7 +24,7 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
           </p>
         </div>
       </div>
-      
+
       {/* يمكن إضافة المزيد من التفاصيل هنا لاحقاً */}
       <div className="mt-4 pt-4 border-t border-border">
         <div className="grid grid-cols-2 gap-4 text-sm">

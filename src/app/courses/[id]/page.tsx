@@ -133,7 +133,7 @@ const CourseDetailPage = () => {
               <SectionHeader
                 title="نظرة عامة على الدورة"
                 subtitle="تعرف على محتوى الدورة وما ستتعلمه"
-                accent="pink"
+                accent={true}
               />
               <div className="mt-6">
                 <p className="text-text leading-relaxed text-lg">
