@@ -13,6 +13,7 @@ import CourseDetails from "@/components/courses/CourseDetails";
 import InstructorCard from "@/components/courses/InstructorCard";
 import ReviewCard from "@/components/courses/ReviewCard";
 import CourseSkeleton from "@/components/courses/CourseSkeleton";
+import { FaExclamationTriangle, FaGraduationCap, FaStar } from "react-icons/fa";
 
 const CourseDetailPage = () => {
   const params = useParams();
@@ -102,7 +103,9 @@ const CourseDetailPage = () => {
     return (
       <Container className="py-16 text-center">
         <div className="max-w-md mx-auto">
-          <div className="text-6xl mb-4">😕</div>
+          <div className="text-6xl mb-4 text-red-500">
+            <FaExclamationTriangle className="mx-auto" />
+          </div>
           <h1 className="text-2xl font-bold text-text mb-4">
             {error || "الدورة غير موجودة"}
           </h1>
@@ -169,9 +172,10 @@ const CourseDetailPage = () => {
                     <Button
                       variant="outline"
                       onClick={scrollToReviews}
-                      className="hover:scale-105 transition-transform"
+                      className="hover:scale-105 transition-transform flex items-center gap-2 mx-auto"
                     >
-                      عرض التقييمات ⭐
+                      <span>عرض التقييمات</span>
+                      <FaStar className="text-yellow-500" />
                     </Button>
                   </div>
                 )}
@@ -201,7 +205,9 @@ const CourseDetailPage = () => {
                 </div>
               ) : (
                 <div className="mt-6 text-center py-12 bg-primary/5 rounded-lg">
-                  <div className="text-4xl mb-4">🎓</div>
+                  <div className="text-4xl mb-4 text-primary">
+                    <FaGraduationCap className="mx-auto" />
+                  </div>
                   <h3 className="text-xl font-medium text-text mb-2">
                     لم يتم إضافة تقييمات بعد
                   </h3>

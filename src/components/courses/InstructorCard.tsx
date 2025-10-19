@@ -6,10 +6,7 @@ interface InstructorCardProps {
   // يمكن إضافة المزيد من البيانات لاحقاً من جدول المدرسين
 }
 
-const InstructorCard: React.FC<InstructorCardProps> = ({
-  instructor_name,
-  instructor_id,
-}) => {
+const InstructorCard: React.FC<InstructorCardProps> = ({ instructor_name }) => {
   return (
     <Card className="p-6">
       <div className="flex items-center gap-4">

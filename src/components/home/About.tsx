@@ -6,6 +6,7 @@ import {
   FaUsers,
   FaGraduationCap,
   FaHandshake,
+  FaChalkboardTeacher,
 } from "react-icons/fa";
 import { MdVerified, MdSchool } from "react-icons/md";
 
@@ -138,7 +139,7 @@ const About: React.FC = () => {
                 className="bg-surface rounded-xl p-6 text-center shadow-sm border border-border hover:shadow-md transition-shadow"
               >
                 <div className="w-20 h-20 bg-primary/10 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <span className="text-3xl">👨‍🏫</span>
+                  <FaChalkboardTeacher className="text-3xl text-primary" />
                 </div>
                 <h4 className="text-xl font-bold text-text-primary font-arabic mb-2">
                   {instructor.name}

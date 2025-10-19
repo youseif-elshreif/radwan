@@ -1,7 +1,9 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Button from "../ui/Button";
 import Badge from "../ui/Badge";
+import FeaturedBadge from "../ui/FeaturedBadge";
 import { Course } from "@/types";
 import { FaBook, FaCalendar, FaUsers, FaEye, FaUserPlus } from "react-icons/fa";
 
@@ -53,9 +55,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
         {course.featured && (
           <div className="absolute top-3 right-3">
-            <Badge variant="primary" className="text-xs">
-              مميز
-            </Badge>
+            <FeaturedBadge size="sm" />
           </div>
         )}
       </div>
@@ -123,14 +123,16 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
         {/* Action Buttons */}
         <div className="flex gap-2 justify-start">
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex-1 flex items-center justify-center gap-1"
-          >
-            <FaEye />
-            <span>عرض الكورس</span>
-          </Button>
+          <Link href={`/courses/${course.id}`}>
+            <Button
+              variant="outline"
+              size="sm"
+              className="flex-1 flex items-center justify-center gap-1"
+            >
+              <FaEye />
+              <span>عرض الكورس</span>
+            </Button>
+          </Link>
 
           <Button
             variant="primary"

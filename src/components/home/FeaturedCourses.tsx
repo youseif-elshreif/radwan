@@ -6,6 +6,7 @@ import { Course } from "@/types";
 import { coursesApi } from "@/api/courses";
 import Button from "../ui/Button";
 import SectionHeader from "../ui/SectionHeader";
+import { FaBook, FaExclamationTriangle } from "react-icons/fa";
 
 const FeaturedCourses: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -20,7 +21,7 @@ const FeaturedCourses: React.FC = () => {
         setCourses(featuredCourses || []);
       } catch (err) {
         console.error("Error loading featured courses:", err);
-        // setError("فشل في تحميل الكورسات المميزة");
+        setError("فشل في تحميل الكورسات المميزة");
         // Use fallback data if API fails
         setCourses([
           {
@@ -177,7 +178,9 @@ const FeaturedCourses: React.FC = () => {
             الكورسات المميزة
           </h2>
           <div className="text-center py-12">
-            <div className="text-6xl mb-4">😔</div>
+            <div className="text-6xl mb-4 text-red-500">
+              <FaExclamationTriangle className="mx-auto" />
+            </div>
             <p className="text-error font-arabic text-lg">{error}</p>
             <button
               onClick={() => window.location.reload()}
@@ -199,7 +202,9 @@ const FeaturedCourses: React.FC = () => {
             الكورسات المميزة
           </h2>
           <div className="text-center py-12">
-            <div className="text-6xl mb-4">📚</div>
+            <div className="text-6xl mb-4 text-primary">
+              <FaBook className="mx-auto" />
+            </div>
             <p className="text-text-secondary font-arabic text-lg">
               لا توجد كورسات مميزة متاحة حالياً
             </p>

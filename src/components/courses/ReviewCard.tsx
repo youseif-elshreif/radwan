@@ -1,5 +1,6 @@
 import Card from "@/components/ui/Card";
 import { Review } from "@/types/course";
+import { FaStar } from "react-icons/fa";
 
 interface ReviewCardProps {
   review: Review;
@@ -8,14 +9,12 @@ interface ReviewCardProps {
 const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, i) => (
-      <span
+      <FaStar
         key={i}
         className={`text-lg ${
           i < rating ? "text-yellow-500" : "text-gray-300"
         }`}
-      >
-        ⭐
-      </span>
+      />
     ));
   };
 
