@@ -21,7 +21,7 @@ const FeaturedCourses: React.FC = () => {
         setCourses(featuredCourses || []);
       } catch (err) {
         console.error("Error loading featured courses:", err);
-        setError("فشل في تحميل الكورسات المميزة");
+        // setError("فشل في تحميل الكورسات المميزة");
         // Use fallback data if API fails
         setCourses([
           {

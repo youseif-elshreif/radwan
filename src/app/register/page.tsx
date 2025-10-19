@@ -34,13 +34,13 @@ const RegisterPage: React.FC = () => {
     (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
       const target = e.target as HTMLInputElement;
       let value: string | number | boolean = target.value;
-      
+
       if (target.type === "checkbox") {
         value = target.checked;
       } else if (field === "numOfPartsofQuran" || field === "age") {
         value = parseInt(target.value) || 0;
       }
-      
+
       setFormData((prev: RegisterFormData) => ({
         ...prev,
         [field]: value,
@@ -285,8 +285,6 @@ const RegisterPage: React.FC = () => {
                   </div>
                 </div>
               </div>
-
-
 
               {/* Submit Button */}
               <Button
