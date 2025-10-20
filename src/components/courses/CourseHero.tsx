@@ -28,7 +28,7 @@ const CourseHero: React.FC<CourseHeroProps> = ({ course }) => {
                   src={course.thumbnail}
                   alt={course.name}
                   fill
-                  className="object-cover"
+                  className="rounded-2xl object-cover"
                   priority
                 />
               ) : (

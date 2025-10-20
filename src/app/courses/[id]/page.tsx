@@ -79,6 +79,35 @@ const CourseDetailPage = () => {
         setCourse(transformedCourse);
       } catch (err) {
         console.error("Error fetching course:", err);
+        setCourse({
+          id: "1",
+          name: "دورة تجريبية",
+          description: "وصف الدورة التجريبية",
+          season_id: "1",
+          start_date: "2024-01-01",
+          end_date: "2024-04-01",
+          num_lectures: 12,
+          capacity: 30,
+          price: 200,
+          instructor_id: "1",
+          tags: ["تجريبي"],
+          featured: false,
+          is_active: true,
+          enrolled_count: 15,
+          thumbnail:
+            "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+          instructor_name: "الأستاذ التجريبي",
+          duration: "12 أسبوع",
+          category: "تجريبي",
+          reviews: [
+            {
+              student: "طالب تجريبي",
+              rating: 5,
+              comment: "هذه دورة تجريبية رائعة!",
+            },
+          ],
+          rating: 5.0,
+        });
         setError("حدث خطأ في تحميل بيانات الدورة");
       } finally {
         setLoading(false);

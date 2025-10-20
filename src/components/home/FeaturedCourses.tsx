@@ -11,7 +11,7 @@ import { FaBook, FaExclamationTriangle } from "react-icons/fa";
 const FeaturedCourses: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null); //eslint-disable-line
 
   useEffect(() => {
     const loadFeaturedCourses = async () => {

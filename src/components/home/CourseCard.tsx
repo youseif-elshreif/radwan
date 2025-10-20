@@ -123,11 +123,11 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
         {/* Action Buttons */}
         <div className="flex gap-2 justify-start">
-          <Link href={`/courses/${course.id}`}>
+          <Link href={`/courses/${course.id}`} className="flex-1">
             <Button
               variant="outline"
               size="sm"
-              className="flex-1 flex items-center justify-center gap-1"
+              className="flex-1 flex items-center justify-center gap-1 w-full"
             >
               <FaEye />
               <span>عرض الكورس</span>
