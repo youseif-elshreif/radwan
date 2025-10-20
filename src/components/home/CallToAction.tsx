@@ -2,6 +2,7 @@ import React from "react";
 import Button from "../ui/Button";
 import { FaArrowLeft, FaPhone, FaWhatsapp } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import Link from "next/link";
 
 const CallToAction: React.FC = () => {
   return (
@@ -26,7 +27,7 @@ const CallToAction: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Content Side */}
           <div className="text-center lg:text-right text-white">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-arabic mb-6 leading-tight">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-arabic mb-6 leading-snug md:leading-snug lg:leading-snug">
               ابدأ رحلة التعلم
               <span className="block text-accent">مع أطفالك اليوم</span>
             </h2>
@@ -37,20 +38,23 @@ const CallToAction: React.FC = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
-              <Button
-                variant="primary"
-                size="lg"
-                className="bg-accent hover:bg-accent-100 text-white border-none shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 min-w-48"
-              >
-                <span className="flex items-center gap-2">
+              <Link href="/courses">
+                <Button
+                  variant="primary"
+                  size="lg"
+                  className="bg-accent hover:bg-accent-100 text-white border-none shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 min-w-48"
+                >
+                  <span className="flex items-center gap-2">
+                    تصفح دوراتنا
+                    <FaArrowLeft className="w-4 h-4" />
+                  </span>
+                </Button>
+              </Link>
+              <Link href="/register">
+                <Button variant="outline" size="lg">
                   سجل الآن مجاناً
-                  <FaArrowLeft className="w-4 h-4" />
-                </span>
-              </Button>
-
-              <Button variant="outline" size="lg">
-                جرب درس تجريبي
-              </Button>
+                </Button>
+              </Link>
             </div>
 
             {/* Contact Options */}

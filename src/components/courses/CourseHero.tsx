@@ -83,7 +83,7 @@ const CourseHero: React.FC<CourseHeroProps> = ({ course }) => {
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <span className="text-3xl font-bold text-primary">
-                    {course.price} ج.م
+                    {course.price} ج.م{" "}
                   </span>
                   <span className="text-text-muted mr-2">للدورة كاملة</span>
                 </div>

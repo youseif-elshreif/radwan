@@ -23,13 +23,15 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Image
-              src="/imgs/Radwan.png"
-              alt="أكاديمية الرضوان"
-              width={180}
-              height={60}
-              className="h-16 w-auto"
-            />
+            <Link href="/">
+              <Image
+                src="/imgs/Radwan.png"
+                alt="أكاديمية الرضوان"
+                width={180}
+                height={60}
+                className="h-16 w-auto"
+              />
+            </Link>
           </div>
 
           {/* Desktop Navigation - RTL aligned */}

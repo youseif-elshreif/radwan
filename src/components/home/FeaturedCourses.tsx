@@ -7,6 +7,7 @@ import { coursesApi } from "@/api/courses";
 import Button from "../ui/Button";
 import SectionHeader from "../ui/SectionHeader";
 import { FaBook, FaExclamationTriangle } from "react-icons/fa";
+import Link from "next/link";
 
 const FeaturedCourses: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -254,9 +255,11 @@ const FeaturedCourses: React.FC = () => {
 
         {/* View All Courses Button */}
         <div className="text-center mt-12">
-          <Button variant="secondary" size="lg" className="min-w-56">
-            عرض جميع الكورسات
-          </Button>
+          <Link href="/courses">
+            <Button variant="secondary" size="lg" className="min-w-56">
+              عرض جميع الدورات
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../ui/Button";
+import Link from "next/link";
 
 const Hero: React.FC = () => {
   return (
@@ -46,18 +47,22 @@ const Hero: React.FC = () => {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           {/* Primary CTA: uses brand primary color per design system */}
-          <Button variant="primary" size="lg" className="min-w-48">
-            تصفح الكورسات
-          </Button>
+          <Link href="/courses">
+            <Button variant="primary" size="lg" className="min-w-48">
+              تصفح الكورسات
+            </Button>
+          </Link>
 
           {/* Secondary CTA: accent outline (no white fill) */}
-          <Button
-            variant="outline"
-            size="lg"
-            className="border-accent text-accent hover:bg-accent hover:text-white focus:ring-accent min-w-48"
-          >
-            سجل الآن
-          </Button>
+          <Link href="/register">
+            <Button
+              variant="outline"
+              size="lg"
+              className="border-accent text-accent hover:bg-accent hover:text-white focus:ring-accent min-w-48"
+            >
+              سجل الآن
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
