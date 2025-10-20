@@ -50,9 +50,10 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar styling */
+/* Custom scrollbar styling (smooth hover transition) */
 ::-webkit-scrollbar {
   width: 8px;
+  transition: all 0.3s ease;
 }
 
 ::-webkit-scrollbar-track {
@@ -60,12 +61,14 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--border);
+  background: linear-gradient(var(--border), var(--border));
   border-radius: 4px;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--text-secondary);
+  opacity: 1;
 }
 
 /* Focus styles for better accessibility */
