@@ -14,7 +14,11 @@
       "enrolled_count": 28,
       "is_active": true,
       "thumbnail": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      "tags": ["قرآن", "تجويد", "مبتدئ"],
+      "tags": [
+        "قرآن",
+        "تجويد",
+        "مبتدئ"
+      ],
       "featured": true
     },
     {
@@ -31,7 +35,11 @@
       "enrolled_count": 20,
       "is_active": true,
       "thumbnail": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      "tags": ["فقه", "عبادات", "مبتدئ"],
+      "tags": [
+        "فقه",
+        "عبادات",
+        "مبتدئ"
+      ],
       "featured": true
     },
     {
@@ -48,7 +56,11 @@
       "enrolled_count": 15,
       "is_active": true,
       "thumbnail": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      "tags": ["برمجة", "أطفال", "مبتدئ"],
+      "tags": [
+        "برمجة",
+        "أطفال",
+        "مبتدئ"
+      ],
       "featured": true
     },
     {
@@ -65,7 +77,11 @@
       "enrolled_count": 12,
       "is_active": true,
       "thumbnail": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      "tags": ["رياضيات", "متقدم", "إعدادي"],
+      "tags": [
+        "رياضيات",
+        "متقدم",
+        "إعدادي"
+      ],
       "featured": false
     },
     {
@@ -82,7 +98,11 @@
       "enrolled_count": 23,
       "is_active": true,
       "thumbnail": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      "tags": ["عربية", "أدب", "نحو"],
+      "tags": [
+        "عربية",
+        "أدب",
+        "نحو"
+      ],
       "featured": true
     }
   ],
@@ -234,7 +254,7 @@
       "dob": "2011-12-05",
       "unique_code": "CH003",
       "status": "active",
-      "photo_url":  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "photo_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       "created_at": "2024-02-01T10:00:00Z"
     }
   ],
@@ -286,40 +306,56 @@
   ],
   "enrollments": [
     {
-      "id": "e1",
-      "course_id": "1",
-      "student_id": "s1",
-      "enrolled_at": "2025-10-01T12:00:00",
-      "active": true,
+      "id": 1,
+      "studentId": "s1",
+      "courseId": "1",
       "status": "active",
-      "created_by": "u1"
+      "paymentConfirmed": true,
+      "createdAt": "2025-10-01T12:00:00Z",
+      "updatedAt": "2025-10-01T14:00:00Z",
+      "amount": 600,
+      "paymentMethod": "cash",
+      "notes": "دفع نقدي في الأكاديمية"
     },
     {
-      "id": "e2",
-      "course_id": "3",
-      "student_id": "s1",
-      "enrolled_at": "2025-10-05T12:00:00",
-      "active": true,
-      "status": "active",
-      "created_by": "u1"
+      "id": 2,
+      "studentId": "s1",
+      "courseId": "3",
+      "status": "pending",
+      "paymentConfirmed": false,
+      "createdAt": "2025-10-20T10:00:00Z",
+      "amount": 800,
+      "notes": "تسجيل عبر الموقع الإلكتروني - في انتظار الدفع"
     },
     {
-      "id": "e3",
-      "course_id": "1",
-      "child_id": "c1",
-      "enrolled_at": "2025-10-02T12:00:00",
-      "active": true,
+      "id": 3,
+      "studentId": "s2",
+      "courseId": "2",
       "status": "active",
-      "created_by": "u1"
+      "paymentConfirmed": true,
+      "createdAt": "2025-10-15T14:30:00Z",
+      "updatedAt": "2025-10-16T09:15:00Z",
+      "amount": 500,
+      "paymentMethod": "bank_transfer"
     },
     {
-      "id": "e4",
-      "course_id": "2",
-      "child_id": "c2",
-      "enrolled_at": "2025-10-03T12:00:00",
-      "active": true,
-      "status": "active",
-      "created_by": "u1"
+      "id": 4,
+      "studentId": "s2",
+      "courseId": "4",
+      "status": "rejected",
+      "paymentConfirmed": false,
+      "createdAt": "2025-10-18T16:45:00Z",
+      "rejectionReason": "الكورس ممتلئ بالكامل",
+      "amount": 1200
+    },
+    {
+      "id": "04de",
+      "studentId": "1",
+      "courseId": "2",
+      "amount": 500,
+      "status": "pending",
+      "paymentConfirmed": false,
+      "createdAt": "2025-10-20T18:16:25.886Z"
     }
   ],
   "lecture_attendances": [
@@ -467,7 +503,7 @@
       "course_id": "1",
       "instructor_id": "ins1",
       "child_id": "c1",
-      "rating": 9.0,
+      "rating": 9,
       "feedback": "طريقة شرح رائعة ومناسبة للأطفال",
       "rated_at": "2025-11-02T19:00:00"
     }

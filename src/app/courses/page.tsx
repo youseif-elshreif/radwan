@@ -3,16 +3,17 @@
 import React, { useState, useEffect } from "react";
 import Container from "@/components/common/Container";
 import FilterBar, { ExtendedFilters } from "@/components/common/FilterBar";
-import CourseCard from "@/components/home/CourseCard";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Button from "@/components/ui/Button";
+import { CourseEnrollmentManager, CourseList } from "@/components/enrollment";
 import { Course, CourseFilters } from "@/types";
+import { CourseWithDetails } from "@/types/course";
 import { coursesApi } from "@/api/courses";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const CoursesPage: React.FC = () => {
-  const [courses, setCourses] = useState<Course[]>([]);
-  const [filteredCourses, setFilteredCourses] = useState<Course[]>([]);
+  const [courses, setCourses] = useState<CourseWithDetails[]>([]);
+  const [filteredCourses, setFilteredCourses] = useState<CourseWithDetails[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -20,7 +21,26 @@ const CoursesPage: React.FC = () => {
 
   useEffect(() => {
     loadInitialData();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Convert Course to CourseWithDetails
+  const convertToDetailsFormat = (course: Course): CourseWithDetails => {
+    return {
+      ...course,
+      season_id: course.season_id || "default-season",
+      instructor_id: course.instructor_id || "default-instructor",
+      rating: 4.5, // Default rating
+      reviews: [], // Default empty reviews array
+      instructor_name: "أستاذ محمد", // Default instructor name
+      duration: "3 أشهر", // Default duration
+      category: course.tags?.[0] || "عام", // Use first tag as category
+      enrolled_count: course.enrolled_count || 0,
+      thumbnail: course.thumbnail || "",
+      tags: course.tags || [],
+      featured: course.featured || false,
+      is_active: course.is_active !== false,
+    };
+  };
 
   const loadInitialData = async () => {
     try {
@@ -30,8 +50,9 @@ const CoursesPage: React.FC = () => {
         coursesApi.getCategories(),
       ]);
 
-      setCourses(coursesData);
-      setFilteredCourses(coursesData);
+      const coursesWithDetails = coursesData.map(convertToDetailsFormat);
+      setCourses(coursesWithDetails);
+      setFilteredCourses(coursesWithDetails);
       setCategories(categoriesData);
     } catch (err) {
       // setError("فشل في تحميل البيانات. يرجى المحاولة مرة أخرى.");
@@ -41,6 +62,7 @@ const CoursesPage: React.FC = () => {
           name: "تحفيظ القرآن الكريم",
           description:
             "كورس شامل لتعلم تلاوة وحفظ القرآن الكريم مع أحكام التجويد الأساسية",
+          season_id: "winter-2024",
           start_date: "2024-01-15",
           end_date: "2024-06-15",
           num_lectures: 30,
@@ -53,18 +75,18 @@ const CoursesPage: React.FC = () => {
           enrolled_count: 85,
           thumbnail:
             "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-          instructor: {
-            id: "1",
-            user_id: "1",
-            bio: "خبرة 12 سنة في تعليم القرآن الكريم وعلومه",
-            avg_rating: 4.9,
-          },
+          instructor_name: "أستاذ محمد أحمد",
+          rating: 4.9,
+          reviews: [],
+          duration: "5 أشهر",
+          category: "قرآن"
         },
         {
           id: "2",
           name: "البرمجة للمبتدئين",
           description:
             "تعلم أساسيات البرمجة من الصفر باستخدام لغة Python بطريقة مبسطة وممتعة",
+          season_id: "winter-2024",
           start_date: "2024-02-01",
           end_date: "2024-05-01",
           num_lectures: 24,
@@ -77,18 +99,18 @@ const CoursesPage: React.FC = () => {
           enrolled_count: 92,
           thumbnail:
             "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-          instructor: {
-            id: "2",
-            user_id: "2",
-            bio: "مهندسة برمجيات بخبرة 8 سنوات في التدريس",
-            avg_rating: 4.7,
-          },
+          instructor_name: "م. سارة محمد",
+          rating: 4.7,
+          reviews: [],
+          duration: "3 أشهر",
+          category: "برمجة"
         },
         {
           id: "3",
           name: "الرياضيات المتقدمة",
           description:
             "كورس شامل في الرياضيات للمرحلة الثانوية وإعداد الطلاب للجامعة",
+          season_id: "spring-2024",
           start_date: "2024-03-01",
           end_date: "2024-08-01",
           num_lectures: 40,
@@ -101,18 +123,18 @@ const CoursesPage: React.FC = () => {
           enrolled_count: 67,
           thumbnail:
             "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-          instructor: {
-            id: "3",
-            user_id: "3",
-            bio: "دكتوراه في الرياضيات مع خبرة 15 سنة",
-            avg_rating: 4.8,
-          },
+          instructor_name: "د. أحمد عبدالرحمن",
+          rating: 4.8,
+          reviews: [],
+          duration: "5 أشهر",
+          category: "رياضيات"
         },
         {
           id: "4",
           name: "تصميم الجرافيك للمبتدئين",
           description:
             "تعلم أساسيات تصميم الجرافيك باستخدام أدوات مثل Photoshop وIllustrator",
+          season_id: "spring-2024",
           start_date: "2024-04-01",
           end_date: "2024-09-01",
           num_lectures: 36,
@@ -125,12 +147,11 @@ const CoursesPage: React.FC = () => {
           enrolled_count: 45,
           thumbnail:
             "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-          instructor: {
-            id: "4",
-            user_id: "4",
-            bio: "مصمم جرافيك بخبرة 10 سنوات في المجال",
-            avg_rating: 4.6,
-          },
+          instructor_name: "أ. نورا الشيخ",
+          rating: 4.6,
+          reviews: [],
+          duration: "5 أشهر",
+          category: "تصميم"
         },
       ]);
       console.error("Error loading data:", err);
@@ -140,9 +161,9 @@ const CoursesPage: React.FC = () => {
   };
 
   const applyClientSideFilters = (
-    courses: Course[],
+    courses: CourseWithDetails[],
     filters: ExtendedFilters
-  ): Course[] => {
+  ): CourseWithDetails[] => {
     let filtered = [...courses];
 
     // Apply price range filter
@@ -212,10 +233,11 @@ const CoursesPage: React.FC = () => {
       if (filters.category) baseFilters.category = filters.category;
 
       const apiFilteredData = await coursesApi.getCourses(baseFilters);
+      const coursesWithDetails = apiFilteredData.map(convertToDetailsFormat);
 
       // Apply client-side filters (sorting, price range, level)
       const fullyFilteredData = applyClientSideFilters(
-        apiFilteredData,
+        coursesWithDetails,
         filters
       );
 
@@ -369,17 +391,9 @@ const CoursesPage: React.FC = () => {
                     <div className="absolute -top-4 -right-4 w-20 h-20 border-2 border-accent/20 rounded-full animate-float hidden lg:block"></div>
                     <div className="absolute -bottom-8 -left-8 w-16 h-16 bg-primary/5 rounded-full animate-pulse-slow hidden lg:block"></div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
-                      {filteredCourses.map((course, index) => (
-                        <div
-                          key={course.id}
-                          className="animate-fade-in"
-                          style={{ animationDelay: `${index * 0.1}s` }}
-                        >
-                          <CourseCard course={course} />
-                        </div>
-                      ))}
-                    </div>
+                    <CourseEnrollmentManager>
+                      <CourseList courses={filteredCourses as CourseWithDetails[]} />
+                    </CourseEnrollmentManager>
                   </div>
                 ) : (
                   <div className="relative text-center py-20">

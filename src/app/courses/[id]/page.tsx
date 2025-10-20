@@ -13,6 +13,9 @@ import CourseDetails from "@/components/courses/CourseDetails";
 import InstructorCard from "@/components/courses/InstructorCard";
 import ReviewCard from "@/components/courses/ReviewCard";
 import CourseSkeleton from "@/components/courses/CourseSkeleton";
+import { EnrollModal } from "@/components/modals";
+import SuccessMessage from "@/components/ui/SuccessMessage";
+import ErrorMessage from "@/components/ui/ErrorMessage";
 import { FaExclamationTriangle, FaGraduationCap, FaStar } from "react-icons/fa";
 
 const CourseDetailPage = () => {
@@ -22,6 +25,14 @@ const CourseDetailPage = () => {
   const [course, setCourse] = useState<CourseWithDetails | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  
+  // Enrollment modal states
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  
+  // Mock student ID - في التطبيق الحقيقي سيأتي من النظام المصادقة
+  const studentId = 1;
 
   // Transform course data to match display requirements
   const transformCourseData = (rawCourse: BaseCourse): CourseWithDetails => {
@@ -122,6 +133,29 @@ const CourseDetailPage = () => {
   const scrollToReviews = () => {
     const reviewsSection = document.getElementById("reviews-section");
     reviewsSection?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // Enrollment functions
+  const handleEnrollClick = () => {
+    setIsEnrollModalOpen(true);
+  };
+
+  const handleEnrollSuccess = (message: string) => {
+    setSuccessMessage(message);
+    setIsEnrollModalOpen(false);
+  };
+
+  const handleEnrollError = (message: string) => {
+    setErrorMessage(message);
+    setIsEnrollModalOpen(false);
+  };
+
+  const handleCloseSuccessMessage = () => {
+    setSuccessMessage("");
+  };
+
+  const handleCloseErrorMessage = () => {
+    setErrorMessage("");
   };
 
   if (loading) {
@@ -272,6 +306,7 @@ const CourseDetailPage = () => {
               <Button
                 size="lg"
                 className="w-full hover:scale-105 transition-transform"
+                onClick={handleEnrollClick}
               >
                 احجز مكانك الآن
               </Button>
@@ -294,11 +329,38 @@ const CourseDetailPage = () => {
             size="lg"
             variant="secondary"
             className="hover:scale-105 transition-transform"
+            onClick={handleEnrollClick}
           >
             سجل الآن - {course.price} ج.م
           </Button>
         </div>
       </Container>
+
+      {/* Enrollment Modal */}
+      {course && (
+        <EnrollModal
+          isOpen={isEnrollModalOpen}
+          onClose={() => setIsEnrollModalOpen(false)}
+          course={course}
+          studentId={studentId}
+          onSuccess={handleEnrollSuccess}
+          onError={handleEnrollError}
+        />
+      )}
+
+      {/* Success Message */}
+      <SuccessMessage
+        message={successMessage}
+        isVisible={!!successMessage}
+        onClose={handleCloseSuccessMessage}
+      />
+
+      {/* Error Message */}
+      <ErrorMessage
+        message={errorMessage}
+        isVisible={!!errorMessage}
+        onClose={handleCloseErrorMessage}
+      />
     </div>
   );
 };
