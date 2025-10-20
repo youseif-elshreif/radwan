@@ -1,7 +1,13 @@
 import React from "react";
 import Image from "next/image";
 import { CourseWithDetails } from "@/types/course";
-import { FaChalkboardTeacher, FaClock, FaBook, FaCalendar, FaUsers } from "react-icons/fa";
+import {
+  FaChalkboardTeacher,
+  FaClock,
+  FaBook,
+  FaCalendar,
+  FaUsers,
+} from "react-icons/fa";
 
 interface EnrollModalBodyProps {
   course: CourseWithDetails;
@@ -39,7 +45,7 @@ const EnrollModalBody: React.FC<EnrollModalBodyProps> = ({ course }) => {
             )}
           </div>
         </div>
-        
+
         <div className="flex-1">
           <h3 className="text-xl font-bold text-text mb-2">{course.name}</h3>
           <p className="text-text-muted text-sm leading-relaxed">
@@ -57,33 +63,37 @@ const EnrollModalBody: React.FC<EnrollModalBodyProps> = ({ course }) => {
             <span className="text-text-muted">المدرس:</span>
             <span className="font-medium">{course.instructor_name}</span>
           </div>
-          
+
           <div className="flex items-center gap-2">
             <FaClock className="text-primary" />
             <span className="text-text-muted">المدة:</span>
             <span className="font-medium">{course.duration}</span>
           </div>
-          
+
           <div className="flex items-center gap-2">
             <FaBook className="text-primary" />
             <span className="text-text-muted">المحاضرات:</span>
             <span className="font-medium">{course.num_lectures} محاضرة</span>
           </div>
-          
+
           <div className="flex items-center gap-2">
             <FaUsers className="text-primary" />
             <span className="text-text-muted">الأماكن المتبقية:</span>
-            <span className={`font-medium ${seatsLeft <= 5 ? 'text-red-500' : 'text-green-500'}`}>
+            <span
+              className={`font-medium ${
+                seatsLeft <= 5 ? "text-red-500" : "text-green-500"
+              }`}
+            >
               {seatsLeft} من {course.capacity}
             </span>
           </div>
-          
+
           <div className="flex items-center gap-2">
             <FaCalendar className="text-primary" />
             <span className="text-text-muted">تاريخ البداية:</span>
             <span className="font-medium">{formatDate(course.start_date)}</span>
           </div>
-          
+
           <div className="flex items-center gap-2">
             <FaCalendar className="text-primary" />
             <span className="text-text-muted">تاريخ النهاية:</span>
@@ -98,9 +108,7 @@ const EnrollModalBody: React.FC<EnrollModalBodyProps> = ({ course }) => {
           <div className="text-3xl font-bold text-primary mb-2">
             {course.price} ج.م
           </div>
-          <p className="text-text-muted text-sm">
-            رسوم الدورة كاملة
-          </p>
+          <p className="text-text-muted text-sm">رسوم الدورة كاملة</p>
         </div>
       </div>
 
@@ -111,7 +119,8 @@ const EnrollModalBody: React.FC<EnrollModalBodyProps> = ({ course }) => {
           <div className="text-sm text-yellow-800">
             <p className="font-medium mb-1">مهم:</p>
             <p>
-              هذا طلب تسجيل أولي. يرجى زيارة الأكاديمية خلال 48 ساعة لاستكمال إجراءات الدفع وتأكيد التسجيل.
+              هذا طلب تسجيل أولي. يرجى زيارة الأكاديمية خلال 48 ساعة لاستكمال
+              إجراءات الدفع وتأكيد التسجيل.
             </p>
           </div>
         </div>
@@ -125,10 +134,9 @@ const EnrollModalBody: React.FC<EnrollModalBodyProps> = ({ course }) => {
             <div className="text-sm text-red-800">
               <p className="font-medium mb-1">تنبيه:</p>
               <p>
-                {seatsLeft === 0 
+                {seatsLeft === 0
                   ? "الدورة مكتملة العدد. سيتم وضعك في قائمة الانتظار."
-                  : `عدد الأماكن محدود - متبقي ${seatsLeft} مقاعد فقط!`
-                }
+                  : `عدد الأماكن محدود - متبقي ${seatsLeft} مقاعد فقط!`}
               </p>
             </div>
           </div>

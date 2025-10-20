@@ -78,16 +78,18 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
       onClick={onClose}
     >
       <div className="bg-white rounded-xl max-w-2xl w-full max-h-screen overflow-y-auto shadow-2xl">
-        <EnrollModalHeader courseName={course.name} onClose={onClose} />
+        <div className="bg-white rounded-xl max-w-2xl w-full max-h-screen overflow-y-auto shadow-2xl">
+          <EnrollModalHeader courseName={course.name} onClose={onClose} />
 
-        <EnrollModalBody course={course} />
+          <EnrollModalBody course={course} />
 
-        <EnrollModalActions
-          onCancel={onClose}
-          onConfirm={handleConfirm}
-          loading={loading}
-          seatsAvailable={seatsAvailable}
-        />
+          <EnrollModalActions
+            onCancel={onClose}
+            onConfirm={handleConfirm}
+            loading={loading}
+            seatsAvailable={seatsAvailable}
+          />
+        </div>
       </div>
     </div>
   );

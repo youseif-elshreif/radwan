@@ -25,12 +25,12 @@ const CourseDetailPage = () => {
   const [course, setCourse] = useState<CourseWithDetails | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  
+
   // Enrollment modal states
   const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
-  
+
   // Mock student ID - في التطبيق الحقيقي سيأتي من النظام المصادقة
   const studentId = 1;
 

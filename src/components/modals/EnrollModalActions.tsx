@@ -13,7 +13,7 @@ const EnrollModalActions: React.FC<EnrollModalActionsProps> = ({
   onCancel,
   onConfirm,
   loading,
-  seatsAvailable
+  seatsAvailable,
 }) => {
   return (
     <div className="flex flex-col sm:flex-row gap-3 p-6 bg-surface border-t border-border">
@@ -26,7 +26,7 @@ const EnrollModalActions: React.FC<EnrollModalActionsProps> = ({
         <FaTimes className="ml-2" />
         إلغاء
       </Button>
-      
+
       <Button
         variant="primary"
         onClick={onConfirm}

@@ -14,7 +14,7 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
   isVisible,
   onClose,
   autoClose = true,
-  duration = 5000
+  duration = 5000,
 }) => {
   useEffect(() => {
     if (isVisible && autoClose) {
@@ -32,13 +32,11 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
     <div className="fixed top-4 right-4 bg-red-50 border border-red-200 rounded-lg shadow-lg p-4 max-w-md z-50">
       <div className="flex items-start gap-3">
         <FaExclamationCircle className="text-red-500 text-xl mt-0.5 flex-shrink-0" />
-        
+
         <div className="flex-1">
-          <p className="text-red-800 text-sm leading-relaxed">
-            {message}
-          </p>
+          <p className="text-red-800 text-sm leading-relaxed">{message}</p>
         </div>
-        
+
         <button
           onClick={onClose}
           className="text-red-500 hover:text-red-700 transition-colors flex-shrink-0"

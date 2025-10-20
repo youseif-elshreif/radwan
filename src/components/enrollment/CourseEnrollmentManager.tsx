@@ -20,7 +20,7 @@ interface EnrollmentState {
 
 const CourseEnrollmentManager: React.FC<CourseEnrollmentManagerProps> = ({
   children,
-  studentId = 1 // Default for testing, should come from auth context
+  studentId = 1, // Default for testing, should come from auth context
 }) => {
   const [state, setState] = useState<EnrollmentState>({
     showModal: false,
@@ -32,7 +32,7 @@ const CourseEnrollmentManager: React.FC<CourseEnrollmentManagerProps> = ({
   });
 
   const handleEnrollClick = (course: CourseWithDetails) => {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
       selectedCourse: course,
       showModal: true,
@@ -40,7 +40,7 @@ const CourseEnrollmentManager: React.FC<CourseEnrollmentManagerProps> = ({
   };
 
   const handleCloseModal = () => {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
       showModal: false,
       selectedCourse: null,
@@ -48,7 +48,7 @@ const CourseEnrollmentManager: React.FC<CourseEnrollmentManagerProps> = ({
   };
 
   const handleEnrollmentSuccess = (message: string) => {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
       successMessage: message,
       showSuccess: true,
@@ -58,7 +58,7 @@ const CourseEnrollmentManager: React.FC<CourseEnrollmentManagerProps> = ({
   };
 
   const handleEnrollmentError = (message: string) => {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
       errorMessage: message,
       showError: true,
@@ -66,7 +66,7 @@ const CourseEnrollmentManager: React.FC<CourseEnrollmentManagerProps> = ({
   };
 
   const handleCloseSuccess = () => {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
       showSuccess: false,
       successMessage: "",
@@ -74,7 +74,7 @@ const CourseEnrollmentManager: React.FC<CourseEnrollmentManagerProps> = ({
   };
 
   const handleCloseError = () => {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
       showError: false,
       errorMessage: "",
@@ -84,7 +84,7 @@ const CourseEnrollmentManager: React.FC<CourseEnrollmentManagerProps> = ({
   return (
     <>
       {/* Render children with enrollment context */}
-      {React.Children.map(children, child => {
+      {React.Children.map(children, (child) => {
         if (React.isValidElement(child)) {
           return React.cloneElement(child, {
             onEnrollClick: handleEnrollClick,

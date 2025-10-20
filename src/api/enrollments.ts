@@ -1,11 +1,18 @@
 import apiClient from "./client";
-import { Enrollment, EnrollmentRequest, EnrollmentUpdateRequest, EnrollmentWithCourse } from "@/types/enrollment";
+import {
+  Enrollment,
+  EnrollmentRequest,
+  EnrollmentUpdateRequest,
+  EnrollmentWithCourse,
+} from "@/types/enrollment";
 
 export const enrollmentsApi = {
   // Get all enrollments for a specific student
   getStudentEnrollments: async (studentId: string): Promise<Enrollment[]> => {
     try {
-      const response = await apiClient.get<Enrollment[]>(`/enrollments?studentId=${studentId}`);
+      const response = await apiClient.get<Enrollment[]>(
+        `/enrollments?studentId=${studentId}`
+      );
       return response.data;
     } catch (error) {
       console.error("Error fetching student enrollments:", error);
@@ -14,29 +21,38 @@ export const enrollmentsApi = {
   },
 
   // Get enrollments with course details
-  getStudentEnrollmentsWithCourses: async (studentId: string): Promise<EnrollmentWithCourse[]> => {
+  getStudentEnrollmentsWithCourses: async (
+    studentId: string
+  ): Promise<EnrollmentWithCourse[]> => {
     try {
       const enrollments = await enrollmentsApi.getStudentEnrollments(studentId);
-      
+
       // Fetch course details for each enrollment
       const enrollmentsWithCourses = await Promise.all(
         enrollments.map(async (enrollment) => {
           try {
-            const courseResponse = await apiClient.get(`/courses/${enrollment.courseId}`);
+            const courseResponse = await apiClient.get(
+              `/courses/${enrollment.courseId}`
+            );
             return {
               ...enrollment,
               course: {
                 id: courseResponse.data.id,
                 name: courseResponse.data.name,
                 price: courseResponse.data.price,
-                instructor_name: courseResponse.data.instructor_name || `الأستاذ ${courseResponse.data.instructor_id}`,
+                instructor_name:
+                  courseResponse.data.instructor_name ||
+                  `الأستاذ ${courseResponse.data.instructor_id}`,
                 thumbnail: courseResponse.data.thumbnail,
                 start_date: courseResponse.data.start_date,
                 end_date: courseResponse.data.end_date,
-              }
+              },
             } as EnrollmentWithCourse;
           } catch (error) {
-            console.error(`Error fetching course ${enrollment.courseId}:`, error);
+            console.error(
+              `Error fetching course ${enrollment.courseId}:`,
+              error
+            );
             // Return enrollment with fallback course data
             return {
               ...enrollment,
@@ -48,7 +64,7 @@ export const enrollmentsApi = {
                 thumbnail: "",
                 start_date: "",
                 end_date: "",
-              }
+              },
             } as EnrollmentWithCourse;
           }
         })
@@ -62,7 +78,9 @@ export const enrollmentsApi = {
   },
 
   // Create new enrollment
-  createEnrollment: async (enrollmentData: EnrollmentRequest): Promise<Enrollment> => {
+  createEnrollment: async (
+    enrollmentData: EnrollmentRequest
+  ): Promise<Enrollment> => {
     try {
       const newEnrollment = {
         ...enrollmentData,
@@ -71,7 +89,10 @@ export const enrollmentsApi = {
         createdAt: new Date().toISOString(),
       };
 
-      const response = await apiClient.post<Enrollment>("/enrollments", newEnrollment);
+      const response = await apiClient.post<Enrollment>(
+        "/enrollments",
+        newEnrollment
+      );
       return response.data;
     } catch (error) {
       console.error("Error creating enrollment:", error);
@@ -80,7 +101,10 @@ export const enrollmentsApi = {
   },
 
   // Update enrollment status (for admin use)
-  updateEnrollment: async (id: number, updateData: EnrollmentUpdateRequest): Promise<Enrollment> => {
+  updateEnrollment: async (
+    id: number,
+    updateData: EnrollmentUpdateRequest
+  ): Promise<Enrollment> => {
     try {
       const response = await apiClient.patch<Enrollment>(`/enrollments/${id}`, {
         ...updateData,
@@ -104,7 +128,10 @@ export const enrollmentsApi = {
   },
 
   // Check if student is already enrolled in a course
-  checkExistingEnrollment: async (studentId: string, courseId: string): Promise<boolean> => {
+  checkExistingEnrollment: async (
+    studentId: string,
+    courseId: string
+  ): Promise<boolean> => {
     try {
       const response = await apiClient.get<Enrollment[]>(
         `/enrollments?studentId=${studentId}&courseId=${courseId}`
@@ -128,13 +155,19 @@ export const enrollmentsApi = {
   },
 
   // Get enrollments by status
-  getEnrollmentsByStatus: async (studentId: string, status: "pending" | "active" | "rejected"): Promise<EnrollmentWithCourse[]> => {
+  getEnrollmentsByStatus: async (
+    studentId: string,
+    status: "pending" | "active" | "rejected"
+  ): Promise<EnrollmentWithCourse[]> => {
     try {
-      const allEnrollments = await enrollmentsApi.getStudentEnrollmentsWithCourses(studentId);
-      return allEnrollments.filter(enrollment => enrollment.status === status);
+      const allEnrollments =
+        await enrollmentsApi.getStudentEnrollmentsWithCourses(studentId);
+      return allEnrollments.filter(
+        (enrollment) => enrollment.status === status
+      );
     } catch (error) {
       console.error("Error fetching enrollments by status:", error);
       throw new Error("فشل في تحميل التسجيلات");
     }
-  }
+  },
 };

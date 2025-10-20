@@ -16,11 +16,12 @@ const EnrollModalHeader: React.FC<EnrollModalHeaderProps> = ({
       <div>
         <h2 className="text-2xl font-bold text-text">تأكيد التسجيل</h2>
         <p className="text-text-muted mt-1">
-          تسجيل في: <span className="font-medium text-primary">{courseName}</span>
+          تسجيل في:{" "}
+          <span className="font-medium text-primary">{courseName}</span>
         </p>
       </div>
       <Button
-        variant="ghost" 
+        variant="ghost"
         size="sm"
         onClick={onClose}
         className="hover:bg-gray-100 p-2 rounded-full"

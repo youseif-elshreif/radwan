@@ -13,7 +13,9 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const CoursesPage: React.FC = () => {
   const [courses, setCourses] = useState<CourseWithDetails[]>([]);
-  const [filteredCourses, setFilteredCourses] = useState<CourseWithDetails[]>([]);
+  const [filteredCourses, setFilteredCourses] = useState<CourseWithDetails[]>(
+    []
+  );
   const [categories, setCategories] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -79,7 +81,7 @@ const CoursesPage: React.FC = () => {
           rating: 4.9,
           reviews: [],
           duration: "5 أشهر",
-          category: "قرآن"
+          category: "قرآن",
         },
         {
           id: "2",
@@ -103,7 +105,7 @@ const CoursesPage: React.FC = () => {
           rating: 4.7,
           reviews: [],
           duration: "3 أشهر",
-          category: "برمجة"
+          category: "برمجة",
         },
         {
           id: "3",
@@ -127,7 +129,7 @@ const CoursesPage: React.FC = () => {
           rating: 4.8,
           reviews: [],
           duration: "5 أشهر",
-          category: "رياضيات"
+          category: "رياضيات",
         },
         {
           id: "4",
@@ -151,7 +153,7 @@ const CoursesPage: React.FC = () => {
           rating: 4.6,
           reviews: [],
           duration: "5 أشهر",
-          category: "تصميم"
+          category: "تصميم",
         },
       ]);
       console.error("Error loading data:", err);
@@ -392,7 +394,9 @@ const CoursesPage: React.FC = () => {
                     <div className="absolute -bottom-8 -left-8 w-16 h-16 bg-primary/5 rounded-full animate-pulse-slow hidden lg:block"></div>
 
                     <CourseEnrollmentManager>
-                      <CourseList courses={filteredCourses as CourseWithDetails[]} />
+                      <CourseList
+                        courses={filteredCourses as CourseWithDetails[]}
+                      />
                     </CourseEnrollmentManager>
                   </div>
                 ) : (

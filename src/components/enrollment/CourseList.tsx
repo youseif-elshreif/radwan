@@ -9,7 +9,7 @@ interface CourseListProps {
 
 const CourseList: React.FC<CourseListProps> = ({ courses, onEnrollClick }) => {
   const handleEnroll = (courseId: string) => {
-    const course = courses.find(c => c.id.toString() === courseId);
+    const course = courses.find((c) => c.id.toString() === courseId);
     if (course && onEnrollClick) {
       onEnrollClick(course);
     }
@@ -18,11 +18,7 @@ const CourseList: React.FC<CourseListProps> = ({ courses, onEnrollClick }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {courses.map((course) => (
-        <CourseCard
-          key={course.id}
-          course={course}
-          onEnroll={handleEnroll}
-        />
+        <CourseCard key={course.id} course={course} onEnroll={handleEnroll} />
       ))}
     </div>
   );
