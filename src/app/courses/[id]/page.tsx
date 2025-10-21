@@ -14,6 +14,7 @@ import InstructorCard from "@/components/courses/InstructorCard";
 import ReviewCard from "@/components/courses/ReviewCard";
 import CourseSkeleton from "@/components/courses/CourseSkeleton";
 import { EnrollModal } from "@/components/modals";
+import AuthRequiredModal from "@/components/auth/AuthRequiredModal";
 import SuccessMessage from "@/components/ui/SuccessMessage";
 import ErrorMessage from "@/components/ui/ErrorMessage";
 import { useAuth } from "@/hooks/useAuth";
@@ -30,6 +31,7 @@ const CourseDetailPage = () => {
 
   // Enrollment modal states
   const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+  const [isAuthRequiredModalOpen, setIsAuthRequiredModalOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -140,7 +142,7 @@ const CourseDetailPage = () => {
   // Enrollment functions
   const handleEnrollClick = () => {
     if (!isLoggedIn) {
-      setErrorMessage("يجب تسجيل الدخول أولاً للتسجيل في الدورة");
+      setIsAuthRequiredModalOpen(true);
       return;
     }
     setIsEnrollModalOpen(true);
@@ -193,7 +195,7 @@ const CourseDetailPage = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <CourseHero course={course} />
+      <CourseHero course={course} onEnrollClick={handleEnrollClick} />
 
       {/* Main Content */}
       <Container className="py-12">
@@ -353,6 +355,13 @@ const CourseDetailPage = () => {
           onError={handleEnrollError}
         />
       )}
+
+      {/* Auth Required Modal */}
+      <AuthRequiredModal
+        isOpen={isAuthRequiredModalOpen}
+        onClose={() => setIsAuthRequiredModalOpen(false)}
+        courseName={course?.name || "الدورة"}
+      />
 
       {/* Success Message */}
       <SuccessMessage

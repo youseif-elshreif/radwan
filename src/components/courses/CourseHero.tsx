@@ -13,9 +13,10 @@ import {
 
 interface CourseHeroProps {
   course: CourseWithDetails;
+  onEnrollClick: () => void;
 }
 
-const CourseHero: React.FC<CourseHeroProps> = ({ course }) => {
+const CourseHero: React.FC<CourseHeroProps> = ({ course, onEnrollClick }) => {
   return (
     <section className="relative bg-gradient-to-br from-primary/10 to-primary/5 py-16">
       <div className="container mx-auto px-4">
@@ -94,7 +95,7 @@ const CourseHero: React.FC<CourseHeroProps> = ({ course }) => {
                   </div>
                 )}
               </div>
-              <Button size="lg" className="w-full">
+              <Button size="lg" className="w-full" onClick={onEnrollClick}>
                 احجز مكانك الآن
               </Button>
               <p className="text-center text-sm text-text-muted mt-3">

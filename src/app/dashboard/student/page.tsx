@@ -6,6 +6,7 @@ import Container from "@/components/common/Container";
 import StudentOverview from "@/components/dashboard/StudentOverview";
 import StudentCoursesList from "@/components/dashboard/StudentCoursesList";
 import StudentProgressCard from "@/components/dashboard/StudentProgressCard";
+import StudentEnrollments from "@/components/dashboard/StudentEnrollments";
 import { StudentDashboardData, Notification } from "@/types";
 import { dashboardApi } from "@/api/dashboard";
 import { FiBell, FiX } from "react-icons/fi";
@@ -121,6 +122,11 @@ const StudentDashboardPage: React.FC = () => {
               student={dashboardData.student}
               stats={dashboardData.stats}
             />
+
+            {/* Student Enrollments */}
+            <div className="mb-8">
+              <StudentEnrollments />
+            </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Courses List */}

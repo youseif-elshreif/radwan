@@ -1,21 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "../ui/Button";
 import Badge from "../ui/Badge";
 import FeaturedBadge from "../ui/FeaturedBadge";
+import AuthRequiredModal from "../auth/AuthRequiredModal";
 import { Course } from "@/types";
+import { CourseWithDetails } from "@/types/course";
+import { useAuth } from "@/hooks/useAuth";
 import { FaBook, FaCalendar, FaUsers, FaEye, FaUserPlus } from "react-icons/fa";
 
 interface CourseCardProps {
-  course: Course;
+  course: Course | CourseWithDetails;
   onEnroll?: (courseId: string) => void;
+  onEnrollClick?: (course: Course | CourseWithDetails) => void;
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({
   course,
   onEnroll = () => {},
+  onEnrollClick,
 }) => {
+  const { isLoggedIn } = useAuth();
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
+  const handleEnrollClick = () => {
+    if (!isLoggedIn) {
+      setIsAuthModalOpen(true);
+      return;
+    }
+
+    if (onEnrollClick) {
+      onEnrollClick(course);
+    } else {
+      onEnroll(course.id);
+    }
+  };
   const formatDate = (dateString?: string) => {
     if (!dateString) return "";
     return new Date(dateString).toLocaleDateString("ar-EG", {
@@ -138,7 +158,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
             variant="primary"
             size="sm"
             className="flex-1 flex items-center justify-center gap-1"
-            onClick={() => onEnroll(course.id)}
+            onClick={handleEnrollClick}
             disabled={seatsLeft === 0}
           >
             {seatsLeft !== 0 && <FaUserPlus />}
@@ -146,6 +166,13 @@ const CourseCard: React.FC<CourseCardProps> = ({
           </Button>
         </div>
       </div>
+
+      {/* Auth Required Modal */}
+      <AuthRequiredModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        courseName={course.name}
+      />
     </div>
   );
 };
