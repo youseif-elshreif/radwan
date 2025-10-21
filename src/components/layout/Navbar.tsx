@@ -4,10 +4,20 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "../ui/Button";
-import { HiMenu, HiX } from "react-icons/hi";
+import { HiMenu, HiX, HiUser, HiLogout } from "react-icons/hi";
+import { useAuth } from "@/hooks/useAuth";
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, isLoggedIn, logout, isLoading } = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
 
   const navLinks = [
     { href: "/", label: "الرئيسية", active: false },
@@ -52,18 +62,45 @@ const Navbar: React.FC = () => {
             </div>
           </div>
 
-          {/* Login Button */}
+          {/* Auth Buttons */}
           <div className="hidden md:flex items-center gap-3">
-            <Link href="/login">
-              <Button variant="outline" size="sm">
-                تسجيل الدخول
-              </Button>
-            </Link>
-            <Link href="/register">
-              <Button variant="primary" size="sm">
-                إنشاء حساب
-              </Button>
-            </Link>
+            {isLoading ? (
+              <div className="w-24 h-8 bg-gray-200 animate-pulse rounded"></div>
+            ) : isLoggedIn ? (
+              <>
+                <div className="flex items-center gap-2 text-sm text-text-secondary">
+                  <HiUser className="w-4 h-4" />
+                  <span>مرحباً، {user?.first_name}</span>
+                </div>
+                <Link href="/dashboard">
+                  <Button variant="outline" size="sm">
+                    حسابي
+                  </Button>
+                </Link>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleLogout}
+                  className="text-red-600 hover:text-red-700 hover:border-red-600"
+                >
+                  <HiLogout className="w-4 h-4 ml-1" />
+                  تسجيل الخروج
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link href="/login">
+                  <Button variant="outline" size="sm">
+                    تسجيل الدخول
+                  </Button>
+                </Link>
+                <Link href="/register">
+                  <Button variant="primary" size="sm">
+                    إنشاء حساب
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -101,16 +138,43 @@ const Navbar: React.FC = () => {
             </Link>
           ))}
           <div className="mt-4 px-3 space-y-2">
-            <Link href="/login" className="block">
-              <Button variant="outline" size="sm" className="w-full">
-                تسجيل الدخول
-              </Button>
-            </Link>
-            <Link href="/register" className="block">
-              <Button variant="primary" size="sm" className="w-full">
-                إنشاء حساب
-              </Button>
-            </Link>
+            {isLoading ? (
+              <div className="h-20 bg-gray-200 animate-pulse rounded"></div>
+            ) : isLoggedIn ? (
+              <>
+                <div className="flex items-center gap-2 px-3 py-2 text-sm text-text-secondary border-b border-border">
+                  <HiUser className="w-4 h-4" />
+                  <span>مرحباً، {user?.first_name}</span>
+                </div>
+                <Link href="/dashboard" className="block">
+                  <Button variant="outline" size="sm" className="w-full">
+                    حسابي
+                  </Button>
+                </Link>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleLogout}
+                  className="w-full text-red-600 hover:text-red-700 hover:border-red-600"
+                >
+                  <HiLogout className="w-4 h-4 ml-1" />
+                  تسجيل الخروج
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link href="/login" className="block">
+                  <Button variant="outline" size="sm" className="w-full">
+                    تسجيل الدخول
+                  </Button>
+                </Link>
+                <Link href="/register" className="block">
+                  <Button variant="primary" size="sm" className="w-full">
+                    إنشاء حساب
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

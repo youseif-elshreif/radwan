@@ -3,6 +3,7 @@ import { Cairo, Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { AuthProvider } from "@/hooks/useAuth";
 
 const cairo = Cairo({
   subsets: ["arabic", "latin"],
@@ -33,11 +34,13 @@ export default function RootLayout({
       <body
         className={`${cairo.variable} ${poppins.variable} font-arabic antialiased`}
       >
-        <div id="root" className="min-h-screen flex flex-col" dir="rtl">
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </div>
+        <AuthProvider>
+          <div id="root" className="min-h-screen flex flex-col" dir="rtl">
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
+        </AuthProvider>
       </body>
     </html>
   );

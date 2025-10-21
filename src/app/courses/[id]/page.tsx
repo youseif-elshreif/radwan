@@ -16,11 +16,13 @@ import CourseSkeleton from "@/components/courses/CourseSkeleton";
 import { EnrollModal } from "@/components/modals";
 import SuccessMessage from "@/components/ui/SuccessMessage";
 import ErrorMessage from "@/components/ui/ErrorMessage";
+import { useAuth } from "@/hooks/useAuth";
 import { FaExclamationTriangle, FaGraduationCap, FaStar } from "react-icons/fa";
 
 const CourseDetailPage = () => {
   const params = useParams();
   const courseId = params.id as string;
+  const { user, isLoggedIn } = useAuth();
 
   const [course, setCourse] = useState<CourseWithDetails | null>(null);
   const [loading, setLoading] = useState(true);
@@ -31,8 +33,8 @@ const CourseDetailPage = () => {
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  // Mock student ID - في التطبيق الحقيقي سيأتي من النظام المصادقة
-  const studentId = 1;
+  // Get student ID from auth context
+  const studentId = user ? parseInt(user.id) : 1;
 
   // Transform course data to match display requirements
   const transformCourseData = (rawCourse: BaseCourse): CourseWithDetails => {
@@ -137,6 +139,10 @@ const CourseDetailPage = () => {
 
   // Enrollment functions
   const handleEnrollClick = () => {
+    if (!isLoggedIn) {
+      setErrorMessage("يجب تسجيل الدخول أولاً للتسجيل في الدورة");
+      return;
+    }
     setIsEnrollModalOpen(true);
   };
 

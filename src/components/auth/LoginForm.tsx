@@ -1,14 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
-import { LoginCredentials, AuthResponse } from "@/types";
+import { LoginCredentials } from "@/types";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
-import { authApi } from "@/api/auth";
+import { useAuth } from "@/hooks/useAuth";
 
 interface LoginFormProps {
   role: "student" | "parent" | "instructor";
@@ -23,6 +23,23 @@ const LoginForm: React.FC<LoginFormProps> = ({
   showSocialLogin = true,
 }) => {
   const router = useRouter();
+  const { login, isLoggedIn, user } = useAuth();
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (isLoggedIn && user) {
+      const defaultRedirects: Record<string, string> = {
+        student: "/dashboard/student",
+        parent: "/dashboard/parent",
+        instructor: "/dashboard/instructor",
+      };
+      const redirectPath =
+        redirectTo ||
+        defaultRedirects[user.role || "student"] ||
+        `/dashboard/${user.role}`;
+      router.push(redirectPath);
+    }
+  }, [isLoggedIn, user, router, redirectTo]);
 
   const [formData, setFormData] = useState<LoginCredentials>({
     identifier: "",
@@ -87,38 +104,28 @@ const LoginForm: React.FC<LoginFormProps> = ({
     setLoginError("");
 
     try {
-      let response: AuthResponse;
+      // Use email/phone as identifier
+      await login(formData.identifier, formData.password);
 
-      if (role === "instructor") {
-        response = await authApi.loginInstructor(formData);
-      } else {
-        response = await authApi.loginStudentOrParent(formData);
-      }
+      // Redirect based on role preference or default
+      const defaultRedirects: Record<string, string> = {
+        student: "/dashboard/student",
+        parent: "/dashboard/parent",
+        instructor: "/dashboard/instructor",
+      };
 
-      if (response.success) {
-        // Store user data (you might want to use a proper auth context/store)
-        if (typeof window !== "undefined") {
-          localStorage.setItem("user", JSON.stringify(response.user));
-          localStorage.setItem("token", response.token || "");
-          localStorage.setItem("userRole", response.role || role);
-        }
-
-        // Redirect based on actual user role from response
-        const defaultRedirects: Record<string, string> = {
-          student: "/dashboard/student",
-          parent: "/dashboard/parent",
-          instructor: "/dashboard/instructor",
-        };
-
-        const userRole = response.role || role;
-        const redirectPath = redirectTo || defaultRedirects[userRole];
-        router.push(redirectPath);
-      } else {
-        setLoginError(response.message);
-      }
-    } catch (error) {
+      const redirectPath = redirectTo || defaultRedirects[role] || "/dashboard";
+      router.push(redirectPath);
+    } catch (error: unknown) {
       console.error("Login error:", error);
-      setLoginError("حدث خطأ أثناء تسجيل الدخول. يرجى المحاولة مرة أخرى.");
+      let errorMessage = "حدث خطأ أثناء تسجيل الدخول. يرجى المحاولة مرة أخرى.";
+      if (error && typeof error === "object" && "response" in error) {
+        const axiosError = error as {
+          response?: { data?: { message?: string } };
+        };
+        errorMessage = axiosError.response?.data?.message || errorMessage;
+      }
+      setLoginError(errorMessage);
     } finally {
       setIsLoading(false);
     }
