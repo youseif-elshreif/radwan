@@ -2,14 +2,19 @@
 
 import React, { useState, useEffect } from "react";
 import CourseCard from "./CourseCard";
-import { Course } from "@/types";
+import { Course, User } from "@/types";
 import { coursesApi } from "@/api/courses";
 import Button from "../ui/Button";
 import SectionHeader from "../ui/SectionHeader";
 import { FaBook, FaExclamationTriangle } from "react-icons/fa";
 import Link from "next/link";
 
-const FeaturedCourses: React.FC = () => {
+interface FeaturedCoursesProps {
+  isLoggedIn?: boolean;
+  user?: User | null;
+}
+
+const FeaturedCourses: React.FC<FeaturedCoursesProps> = ({ isLoggedIn = false, user = null }) => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null); //eslint-disable-line
@@ -237,8 +242,12 @@ const FeaturedCourses: React.FC = () => {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          title="الكورسات المميزة"
-          subtitle="اكتشف أفضل الكورسات التعليمية المصممة خصيصاً لتطوير مهارات الأطفال والشباب"
+          title={isLoggedIn ? "دورات جديدة لك" : "الكورسات المميزة"}
+          subtitle={
+            isLoggedIn 
+              ? `مرحباً ${user?.first_name}، اكتشف الدورات الجديدة المناسبة لاهتماماتك`
+              : "اكتشف أفضل الكورسات التعليمية المصممة خصيصاً لتطوير مهارات الأطفال والشباب"
+          }
           accent={true}
         />
 

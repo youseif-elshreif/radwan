@@ -10,8 +10,11 @@ import CallToAction from "@/components/home/CallToAction";
 import Testimonials from "@/components/home/Testimonials";
 import StatusCounters from "@/components/home/StatusCounters";
 import { SearchFilters as SearchFiltersType } from "@/types";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function HomePage() {
+  const { isLoggedIn, user } = useAuth();
+
   const handleFiltersChange = (filters: SearchFiltersType) => {
     // Handle search filters change
     console.log("Filters changed:", filters);
@@ -21,7 +24,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <Hero />
+      <Hero isLoggedIn={isLoggedIn} user={user} />
 
       {/* Statistics Counters */}
       <StatusCounters />
@@ -36,13 +39,13 @@ export default function HomePage() {
       <SearchFilters onFiltersChange={handleFiltersChange} />
 
       {/* Courses Section */}
-      <FeaturedCourses />
+      <FeaturedCourses isLoggedIn={isLoggedIn} user={user} />
 
       {/* Testimonials */}
       <Testimonials />
 
       {/* Call To Action Section */}
-      <CallToAction />
+      {!isLoggedIn && <CallToAction />}
     </div>
   );
 }

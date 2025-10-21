@@ -1,8 +1,14 @@
 import React from "react";
 import Button from "../ui/Button";
 import Link from "next/link";
+import { User } from "@/types";
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  isLoggedIn?: boolean;
+  user?: User | null;
+}
+
+const Hero: React.FC<HeroProps> = ({ isLoggedIn = false, user = null }) => {
   return (
     <section className="relative min-h-[calc(100vh-4rem)] py-11 flex items-center justify-center overflow-hidden">
       {/* Background - Gradient matching courses page */}
@@ -34,35 +40,68 @@ const Hero: React.FC = () => {
 
       {/* Content */}
       <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 max-w-4xl">
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 font-arabic">
-          أكاديمية الرضوان
-          <span className="mx-2 text-accent"> للتعليم </span>
-          المتميز
-        </h1>
-
-        <p className="text-xl sm:text-2xl mb-8 font-arabic text-white/90 max-w-2xl mx-auto">
-          نقدم أفضل البرامج التعليمية للأطفال والشباب في بيئة تعليمية محفزة
-          ومبتكرة
-        </p>
+        {isLoggedIn ? (
+          <>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 font-arabic">
+              مرحباً بك مجدداً،
+              <span className="mx-2 text-accent">{user?.first_name}</span>
+            </h1>
+            <p className="text-xl sm:text-2xl mb-8 font-arabic text-white/90 max-w-2xl mx-auto">
+              استكمل رحلتك التعليمية واكتشف الدورات الجديدة
+            </p>
+          </>
+        ) : (
+          <>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 font-arabic">
+              أكاديمية الرضوان
+              <span className="mx-2 text-accent"> للتعليم </span>
+              المتميز
+            </h1>
+            <p className="text-xl sm:text-2xl mb-8 font-arabic text-white/90 max-w-2xl mx-auto">
+              نقدم أفضل البرامج التعليمية للأطفال والشباب في بيئة تعليمية محفزة
+              ومبتكرة
+            </p>
+          </>
+        )}
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          {/* Primary CTA: uses brand primary color per design system */}
-          <Link href="/courses">
-            <Button variant="primary" size="lg" className="min-w-48">
-              تصفح الكورسات
-            </Button>
-          </Link>
-
-          {/* Secondary CTA: accent outline (no white fill) */}
-          <Link href="/register">
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-accent text-accent hover:bg-accent hover:text-white focus:ring-accent min-w-48"
-            >
-              سجل الآن
-            </Button>
-          </Link>
+          {isLoggedIn ? (
+            <>
+              {/* Logged in user actions */}
+              <Link href="/courses">
+                <Button variant="primary" size="lg" className="min-w-48">
+                  تصفح الدورات الجديدة
+                </Button>
+              </Link>
+              <Link href="/dashboard">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="border-accent text-accent hover:bg-accent hover:text-white focus:ring-accent min-w-48"
+                >
+                  لوحة التحكم
+                </Button>
+              </Link>
+            </>
+          ) : (
+            <>
+              {/* Guest user actions */}
+              <Link href="/courses">
+                <Button variant="primary" size="lg" className="min-w-48">
+                  تصفح الكورسات
+                </Button>
+              </Link>
+              <Link href="/register">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="border-accent text-accent hover:bg-accent hover:text-white focus:ring-accent min-w-48"
+                >
+                  سجل الآن
+                </Button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </section>
