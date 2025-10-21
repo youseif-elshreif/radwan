@@ -14,7 +14,10 @@ interface FeaturedCoursesProps {
   user?: User | null;
 }
 
-const FeaturedCourses: React.FC<FeaturedCoursesProps> = ({ isLoggedIn = false, user = null }) => {
+const FeaturedCourses: React.FC<FeaturedCoursesProps> = ({
+  isLoggedIn = false,
+  user = null,
+}) => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null); //eslint-disable-line
@@ -244,7 +247,7 @@ const FeaturedCourses: React.FC<FeaturedCoursesProps> = ({ isLoggedIn = false, u
         <SectionHeader
           title={isLoggedIn ? "دورات جديدة لك" : "الكورسات المميزة"}
           subtitle={
-            isLoggedIn 
+            isLoggedIn
               ? `مرحباً ${user?.first_name}، اكتشف الدورات الجديدة المناسبة لاهتماماتك`
               : "اكتشف أفضل الكورسات التعليمية المصممة خصيصاً لتطوير مهارات الأطفال والشباب"
           }
