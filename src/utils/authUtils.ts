@@ -1,53 +1,28 @@
-﻿// authUtils.ts - Helper functions for authentication
+﻿// authUtils.ts - Secure helper functions for authentication
 import api from "./api";
 
+// In-memory token storage (cleared on page refresh)
+let accessToken: string | null = null;
+
 /**
- * Get the access token from cookies
+ * Get the access token from memory
  */
 export const getAccessToken = (): string | null => {
-  if (typeof window === "undefined") return null;
-
-  const cookies = document.cookie.split(";");
-  const tokenCookie = cookies.find((cookie) =>
-    cookie.trim().startsWith("accessToken=")
-  );
-
-  if (tokenCookie) {
-    return tokenCookie.split("=")[1];
-  }
-
-  return null;
+  return accessToken;
 };
 
 /**
- * Save the access token to cookies
+ * Save the access token to memory only
  */
 export const saveAccessToken = (token: string): void => {
-  if (typeof window === "undefined") return;
-
-  // Set cookie with security options
-  const isSecure = window.location.protocol === "https:";
-  const cookieOptions = [
-    `accessToken=${token}`,
-    "Path=/",
-    "SameSite=Strict",
-    ...(isSecure ? ["Secure"] : []),
-    // Set expiration to 7 days
-    `Max-Age=${7 * 24 * 60 * 60}`,
-  ];
-
-  document.cookie = cookieOptions.join("; ");
+  accessToken = token;
 };
 
 /**
- * Remove the access token from cookies
+ * Remove the access token from memory
  */
 export const removeAccessToken = (): void => {
-  if (typeof window === "undefined") return;
-
-  // Set expiration date to past to delete cookie
-  document.cookie =
-    "accessToken=; Path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  accessToken = null;
 };
 
 /**
@@ -89,8 +64,8 @@ export const isTokenExpired = (token: string): boolean => {
     if (!decoded || !decoded.exp || typeof decoded.exp !== "number") {
       return true;
     }
-    // Check if expiration time is past current time
-    return decoded.exp * 1000 < Date.now();
+    // Check if expiration time is past current time (with 30 second buffer)
+    return decoded.exp * 1000 < Date.now() + 30000;
   } catch {
     return true;
   }
@@ -99,9 +74,19 @@ export const isTokenExpired = (token: string): boolean => {
 /**
  * Handles logout - clears token and redirects to login
  */
-export const logout = (): void => {
-  removeAccessToken();
-  window.location.href = "/login";
+export const logout = async (): Promise<void> => {
+  try {
+    // Call logout endpoint to clear HttpOnly refresh token cookie
+    await api.post("/auth/logout", {});
+  } catch (error) {
+    // Continue with logout even if API call fails
+    console.warn("Logout API call failed:", error);
+  } finally {
+    removeAccessToken();
+    if (typeof window !== "undefined") {
+      window.location.href = "/login";
+    }
+  }
 };
 
 /**
@@ -110,6 +95,8 @@ export const logout = (): void => {
  */
 export const refreshToken = async (): Promise<string | null> => {
   try {
+    // This will use the HttpOnly refresh token cookie automatically
+    // Note: skipAuthInterceptor is handled in the api interceptor
     const response = await api.post<{ accessToken: string }>(
       "/auth/refresh-token",
       {}
@@ -118,7 +105,8 @@ export const refreshToken = async (): Promise<string | null> => {
     saveAccessToken(newToken);
     return newToken;
   } catch (error) {
-    logout();
+    // If refresh fails, user needs to login again
+    removeAccessToken();
     throw error;
   }
 };
@@ -131,15 +119,40 @@ export const checkAndRefreshToken = async (): Promise<boolean> => {
   const token = getAccessToken();
 
   if (!token) {
-    return false;
+    // Try to get a new token using refresh token
+    try {
+      const newToken = await refreshToken();
+      return !!newToken;
+    } catch {
+      return false;
+    }
   }
 
   // If token is expired or will expire in the next 5 minutes, refresh it
   if (isTokenExpired(token)) {
-    const newToken = await refreshToken();
-    return !!newToken;
+    try {
+      const newToken = await refreshToken();
+      return !!newToken;
+    } catch {
+      return false;
+    }
   }
 
   // Token is still valid
   return true;
+};
+
+/**
+ * Initialize authentication state - call this on app startup
+ * Tries to get a token using the refresh token if available
+ */
+export const initializeAuth = async (): Promise<boolean> => {
+  try {
+    // Try to refresh token on startup to get access token from refresh cookie
+    const newToken = await refreshToken();
+    return !!newToken;
+  } catch {
+    // No valid refresh token available
+    return false;
+  }
 };

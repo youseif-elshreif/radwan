@@ -8,10 +8,14 @@ import {
   removeAccessToken,
 } from "./authUtils";
 
+// Extend request config interface
+interface ExtendedAxiosRequestConfig extends InternalAxiosRequestConfig {
+  skipAuthInterceptor?: boolean;
+}
+
 // API Base URL from environment variables
 export const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ||
-  
   "http://localhost:3001" ||
   "http://localhost:4000";
 
@@ -51,6 +55,12 @@ const logRequest = (config: InternalAxiosRequestConfig) => {
 
 // Add auth header to requests if token exists
 const addAuthHeader = (config: InternalAxiosRequestConfig) => {
+  // Skip adding auth header if skipAuthInterceptor is true
+  const extendedConfig = config as ExtendedAxiosRequestConfig;
+  if (extendedConfig.skipAuthInterceptor) {
+    return config;
+  }
+
   const token = getAccessToken();
   if (token) {
     if (!config.headers) {
@@ -71,14 +81,17 @@ api.interceptors.response.use(
     return response;
   },
   async (error: AxiosError) => {
-    const originalRequest = error.config as InternalAxiosRequestConfig & {
+    const originalRequest = error.config as ExtendedAxiosRequestConfig & {
       _retry?: boolean;
     };
 
     // Only attempt to refresh the token if we get a 401 and haven't tried yet
+    // Also skip if this is already a refresh request or if skipAuthInterceptor is true
     if (
       error.response?.status === 401 &&
       !originalRequest._retry &&
+      !originalRequest.skipAuthInterceptor &&
+      originalRequest.url !== "/auth/refresh-token" &&
       originalRequest.url !== "/api/auth/refresh-token"
     ) {
       if (isRefreshing) {
@@ -87,6 +100,9 @@ api.interceptors.response.use(
           const token = await new Promise<string>((resolve, reject) => {
             failedQueue.push({ resolve, reject });
           });
+          if (!originalRequest.headers) {
+            originalRequest.headers = new axios.AxiosHeaders();
+          }
           originalRequest.headers.Authorization = `Bearer ${token}`;
           return api(originalRequest);
         } catch (err) {
@@ -98,15 +114,14 @@ api.interceptors.response.use(
       isRefreshing = true;
 
       try {
+        // Use skipAuthInterceptor to prevent infinite loops
         const { data } = await api.post<RefreshTokenResponse>(
-          `/api/auth/refresh-token`,
+          `/auth/refresh-token`,
           {},
           {
+            skipAuthInterceptor: true,
             withCredentials: true,
-            headers: {
-              Authorization: undefined,
-            },
-          }
+          } as ExtendedAxiosRequestConfig
         );
 
         const newToken = data.accessToken;
@@ -118,6 +133,9 @@ api.interceptors.response.use(
         processQueue(null, newToken);
 
         // Return original request with new token
+        if (!originalRequest.headers) {
+          originalRequest.headers = new axios.AxiosHeaders();
+        }
         originalRequest.headers.Authorization = `Bearer ${newToken}`;
         return api(originalRequest);
       } catch (refreshError) {
